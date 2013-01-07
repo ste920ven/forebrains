@@ -30,15 +30,21 @@ def addPlayer(user,game):
     games.update({"name" : game},{"$set" : {"players" : tmp}})
 
 def checkuserpass(user,password):
+    encpass = base64.b64encode(password)
     tmp = users.find_one({"user" : user})
-    if password == tmp["pass"]:
+    if encpass == tmp["pass"]:
         return True
     else:
         return False
 
 def checkgamepass(game,password):
+    encpass = base64.b64encode(password)
     tmp = games.find_one({"name":game)}
-    if password == tmp["pass"]
+    if encpass == tmp["pass"]:
+        return True
+    else:
+        return False
+
 
 #encode password for check
 
