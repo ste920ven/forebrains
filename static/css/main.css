@@ -4,6 +4,9 @@
 		   font-size:13;
 		  }
 
+body              {background:url('../bedge_grunge.png');
+		  }
+
 .tab *            {background-image: -moz-linear-gradient(#F5ED96, #F3F3F3);
                    background-image: -webkit-linear-gradient(#70ECA2, #35B9BE);
                    background-image: linear-gradient(#9B1818, #F3F3F3);
