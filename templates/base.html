@@ -1,0 +1,14 @@
+<!doctype html>
+<head>
+  {{% block head %}}
+  <title>{{% block title %}}Title{{% block title %}}</title>
+  <link rel="shortcut icon" href="{{url_for("static", filename="favicon.ico")}}">
+  <style type="text/css">@import "{{url_for("static", filename="css/main.css")}}";</style>
+  <script src="/static/js/jquery.js"></script>
+  {{% endblock %}}
+</head>
+{{% block body %}}
+<body>
+<p>
+{{% endblock %}}
+</body>
