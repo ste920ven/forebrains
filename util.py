@@ -3,6 +3,7 @@ import json
 import sys
 import time
 import base64
+import random
 from pymongo import Connection
 
 Conn = Connection('ds041367.mongolab.com',41367)
@@ -30,15 +31,37 @@ def addPlayer(user,game):
     games.update({"name" : game},{"$set" : {"players" : tmp}})
 
 def checkuserpass(user,password):
+    encpass = base64.b64encode(password)
     tmp = users.find_one({"user" : user})
-    if password == tmp["pass"]:
+    if encpass == tmp["pass"]:
         return True
     else:
         return False
 
 def checkgamepass(game,password):
-    tmp = games.find_one({"name":game)}
-    if password == tmp["pass"]
+    encpass = base64.b64encode(password)
+    tmp = games.find_one({"name":game})
+    if encpass == tmp["pass"]:
+        return True
+    else:
+        return False
+
+def getTarget(player,game):
+    tmp = games.find_one({"name":game})
+    return tmp[player]["target"]
+
+def startGame(game):
+    tmp = games.find_one({"name":game})
+    k = tmp.keys()
+    targets = tmp.keys()
+    random.shuffle(targets)
+    current = 0
+    for person in k:
+        tmp[person]["live"] = True
+        tmp[person]["target"] = targets[current]
+        current = current + 1
+    games.update({"name":game},{"$set":game})
+        
 
 #encode password for check
 
