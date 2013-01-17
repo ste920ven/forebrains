@@ -24,8 +24,9 @@
     }
   </script>
 {% endblock %}
-
+{% block body %}
 <body onload="initialize()">
   {% block tabs %}{{super()}}{% endblock %}
   <div id="map_canvas"></div>
 </body>
+{% endblock %}
