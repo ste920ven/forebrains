@@ -1,23 +1,22 @@
 import util
 
-class game:
-  def __init_(self):
-
-  def end(self):
+def kill(game,pursuer,target):
+  newTarget = getTarget(game,player)
+  setTarget(game,pursuer,newTarget)
+  isAlive(game,target,FALSE)
+  return TRUE
   
-  def startGame(self):
-
-  def eliminate(self,player):
-    
-
-class player:
-target = NULL
-
-  def __init__(self):
-
-  def updateLoc(self,loc):
+def checkIn(game,player,loc):
+  setLoc(game,player,loc)
+  return getLastLoc(game,player)
   
-  def updateMap(self):
-
-  def getKill(self,player):
-    target = player.target
+def score(game,player):
+  
+def end(game):
+  
+def penalize(game,player):
+  newPenalty = getPenalty(game,player)+1
+  setPenatly(game,player,newPenalty)
+  return TRUE
+  
+def respawn(game,player):
