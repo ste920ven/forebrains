@@ -1,0 +1,18 @@
+<!doctype html>
+<head>
+  {% block head %}
+  <title>{% block title %}Title{% endblock %}</title>
+  <link rel="shortcut icon" href="{{url_for("static", filename="favicon.ico")}}">
+  <style type="text/css">@import "{{url_for("static", filename="css/main.css")}}";</style>
+  <script src="/static/js/jquery.js"></script>
+  {% endblock %}
+</head>
+{% block body %}
+{% block tabs %}
+  <div class="tabs">
+    <ul id="tabnav">
+      <li class="tab1"><a href="{{ url_for('index')}}">Home</a></li>
+      <li class="tab2"><a href="{{url_for('login')}}">Login</a></li>
+  </div>
+{% endblock %}
+{% endblock %}
