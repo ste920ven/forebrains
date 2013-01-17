@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
-{{% block head %}}
+{% block head %}
 {{ super() }}
-{{% block title %}}Assassin{{% endblock %}}
+{% block title %}Assassin{% endblock %}
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
   <style type="text/css">
     html { height: 100% }
@@ -23,14 +23,14 @@
           mapOptions);
     }
   </script>
-{{% endblock %}}
+{% endblock %}
 
-{{% block body %}}
+{% block body %}
 <body onload="initialize()">
   <div class="tab">
     <div class="hometab">Home</div>
     <div class="logintab">Login</div>
   </div>
   <div id="map_canvas"></div>
-{{% endblock %}}
 </body>
+{% endblock %}

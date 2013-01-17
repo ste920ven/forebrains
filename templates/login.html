@@ -1,11 +1,17 @@
-<!doctype html>
+{% extends "base.html" %}
+{% block head %}
+{{ super() }}
+{% block title %}Login{% endblock %}
+{% endblock %}
 
-<head>
-  <title>Login</title>
-  <link rel="shortcut icon" href="{{url_for("static", filename="favicon.ico")}}">
-  <style type="text/css">@import "{{url_for("static", filename="css/main.css")}}";</style>
-  <script src="/static/js/jquery.js"></script>
-</head>
-
+{% block body %}
 <body>
-<div 
+  <div id="input">
+    <form action="" method="POST">
+      <input type="text" name="Username" class="" placeholder="Type your username"></textarea>
+      <input type="text" name="Password" class="" placeholder="Type your password"></textarea>
+      <input type="submit" name="button" value="Login" class=""><br><br>
+    </form>
+  </div>
+</body>
+{% endblock %}
