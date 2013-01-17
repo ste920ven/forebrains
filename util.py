@@ -46,10 +46,6 @@ def checkgamepass(game,password):
     else:
         return False
 
-def getTarget(player,game):
-    tmp = games.find_one({"name":game})
-    return tmp[player]["target"]
-
 def startGame(game):
     tmp = games.find_one({"name":game})
     k = tmp.keys()
@@ -62,7 +58,11 @@ def startGame(game):
         current = current + 1
     games.update({"name":game},{"$set":game})
     return True
-        
+       
+def getTarget(player,game):
+    tmp = games.find_one({"name":game})
+    return tmp[player]["target"]
+
 def getPursuer(player,game):
     tmp = games.find_one({"name":game})
     return tmp[player]["target"]
@@ -89,6 +89,13 @@ def addFriend(player,friend):
     tmp["friends"].append(friend)
     users.update({"user":player},{"$set":{"friends":tmp}})
     return True
+
+def getAllLocs(game):
+    locations = []
+    tmp = games.find_one({"name":game})
+    k = tmp.keys()
+    for person in k:
+        
 
 #encode password for check
 
