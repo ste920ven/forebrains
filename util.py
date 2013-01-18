@@ -22,12 +22,12 @@ def createGame(creator,password,name):
         tmp = base64.b64encode(password)
     else:
         tmp = False
-    newgame = {"creator" : creator, "pass" : tmp, "name" : name, "players" : {creator : {"lat": 0, "long": 0, "pursuer" : "", "target" : "", "kills" = 0, "live" : False}}}
+    newgame = {"creator" : creator, "pass" : tmp, "name" : name, "players" : {creator : {"loc":[0,0], "pursuer" : "", "target" : "", "kills" = 0, "live" : False}}}
     games.insert(newgame)
 
 def addPlayer(user,game):
     tmp = games.find_one({"name":game})["players"]
-    tmp[user] = {"lat": 0, "long": 0, "pursuer" : "", "target" : "", "kills" = 0, "live" : False}
+    tmp[user] = {"loc":[0,0], "pursuer" : "", "target" : "", "kills" = 0, "live" : False}
     games.update({"name" : game},{"$set" : {"players" : tmp}})
 
 def checkuserpass(user,password):
@@ -46,10 +46,6 @@ def checkgamepass(game,password):
     else:
         return False
 
-def getTarget(player,game):
-    tmp = games.find_one({"name":game})
-    return tmp[player]["target"]
-
 def startGame(game):
     tmp = games.find_one({"name":game})
     k = tmp.keys()
@@ -61,6 +57,44 @@ def startGame(game):
         tmp[person]["target"] = targets[current]
         current = current + 1
     games.update({"name":game},{"$set":game})
+    return True
+       
+def getTarget(player,game):
+    tmp = games.find_one({"name":game})
+    return tmp[player]["target"]
+
+def getPursuer(player,game):
+    tmp = games.find_one({"name":game})
+    return tmp[player]["target"]
+
+def isAlive(player,game):
+    tmp = games.find_one({"name":game})
+    return tmp[player]["live"]
+
+def getKills(player,game):
+    tmp = games.find_one({"name":game})
+    return tmp[player]["kills"]
+
+def getLastLoc(player,game):
+    tmp = games.find_one({"name":game})
+    return tmp[player]["loc"]
+
+def setLoc(player,game,loc):
+    games.update({"name":game},{"$set":{"loc":loc}})
+    return True
+
+    
+def addFriend(player,friend):
+    tmp = users.find_one({"user":player})
+    tmp["friends"].append(friend)
+    users.update({"user":player},{"$set":{"friends":tmp}})
+    return True
+
+def getAllLocs(game):
+    locations = []
+    tmp = games.find_one({"name":game})
+    k = tmp.keys()
+    for person in k:
         
 
 #encode password for check
