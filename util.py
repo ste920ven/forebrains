@@ -25,9 +25,9 @@ def createGame(creator,password,name):
     newgame = {"creator" : creator, "pass" : tmp, "name" : name, "players" : {creator : {"loc":[0,0], "pursuer" : "", "target" : "", "kills" = 0, "live" : False}}}
     games.insert(newgame)
 
-def addPlayer(user,game):
+def addPlayer(game,user):
     tmp = games.find_one({"name":game})["players"]
-    tmp[user] = {"loc":[0,0], "pursuer" : "", "target" : "", "kills" = 0, "live" : False}
+    tmp[user] = {"loc":[0,0], "pursuer" : "", "target" : "", "kills" = 0, "live" : False, "penalty" : 0}
     games.update({"name" : game},{"$set" : {"players" : tmp}})
 
 def checkuserpass(user,password):
@@ -59,29 +59,41 @@ def startGame(game):
     games.update({"name":game},{"$set":game})
     return True
        
-def getTarget(player,game):
+def getTarget(game,player):
     tmp = games.find_one({"name":game})
     return tmp[player]["target"]
 
-def getPursuer(player,game):
+def getPursuer(game,player):
     tmp = games.find_one({"name":game})
     return tmp[player]["target"]
 
-def isAlive(player,game):
+def isAlive(game,player):
     tmp = games.find_one({"name":game})
     return tmp[player]["live"]
 
-def getKills(player,game):
+def getKills(game,player):
     tmp = games.find_one({"name":game})
     return tmp[player]["kills"]
 
-def getLastLoc(player,game):
+def getLastLoc(game,player):
     tmp = games.find_one({"name":game})
     return tmp[player]["loc"]
-
-def setLoc(player,game,loc):
+    
+def getPenalty(game,player):
+    tmp = games.find_one({"name":game})
+    return tmp[player]["penalty"]
+    
+def setLoc(game,player,loc):
     games.update({"name":game},{"$set":{"loc":loc}})
     return True
+    
+def setTarget(game,pursuer,target):
+
+
+def setPenatly(game,player,penalty):
+
+    
+def setAlive(game,player,status):
 
     
 def addFriend(player,friend):
