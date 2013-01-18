@@ -1,15 +1,66 @@
-from flask import request,Flask,render_template, url_for,redirect,request
-import urllib2,json
+from flask import request,Flask,render_template, url_for,redirect,request,session
+import urllib2,json,util
 
 app=Flask(__name__)
+app.secret_key = "JackStevenDinaandBiggsAreAwesomeExceptNotReallyDina1"
 
-@app.route("/")
+@app.route("/",methods=["POST","GET"])
 def index():
-    return render_template("index.html")
+    if request.method=="GET":
+        return render_template("index.html")
+    else:
+        pending = request.form.keys()[0]
+        if "tab" in pending:
+            return handleTabs(pending)
 
-@app.route("/login")
+@app.route("/login",methods=["POST","GET"])
 def login():
-    return render_template("login.html")	
+    if request.method=="GET":
+        return render_template("login.html")	
+    else:
+        pending = request.form.keys()[0]
+        if "tab" in pending:
+            return handleTabs(pending)
+        else: 
+            if request.form.has_key("submitlogin"):
+                user = str(request.form["Username"])
+                password = str(request.form["Password"])
+                validate = util.checkUserPass(user,password)
+                if validate == 0:
+                    #User doesn't exist
+                    return render_template("login.html")
+                if validate == True:
+                    session['user'] = user
+                    return redirect(url_for("index"))
+                if validate == False:
+                    #Password Incorrect
+                    return render_template("login.html")
+
+@app.route("/signup",methods=["POST","GET"])
+def signup():
+    if request.method=="GET":
+        return render_template("signup.html")
+    else:
+        pending = request.form.keys()[0]
+        if "tab" in pending:
+            return handleTabs(pending)
+        user = str(request.form["user"])
+        password = str(request.form["pass1"])
+        if password != str(request.form["pass2"]):
+            return render_template("signup.html",notmatching=True)
+        if util.createUser(user,password):
+            return redirect(url_for("login"))
+        else:
+            return render_template("signup.html",taken=True)
+
+def handleTabs(pressed):
+    if "home" in pressed:
+        return redirect(url_for("index"))
+    if "login" in pressed:
+        return redirect(url_for("login"))
+    if "signup" in pressed:
+        return redirect(url_for("signup"))
+
 
 if __name__=="__main__":
     app.debug=True

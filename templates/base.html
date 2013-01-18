@@ -11,8 +11,16 @@
 {% block tabs %}
   <div class="tabs">
     <ul id="tabnav">
-      <li class="tab1"><a href="{{ url_for('index')}}">Home</a></li>
-      <li class="tab2"><a href="{{url_for('login')}}">Login</a></li>
+      <form action="" method="POST">
+      <li class="tab1"><button name="tabhome">Home</button></li>
+      </form>
+      <form action="" method="POST">
+      <li class="tab2"><button name="tablogin">Login</button></li>
+      </form>
+      <form action="" method="POST">
+      <li class="tab2"><button name="tabsignup">Sign Up</button></li>
+      </form>
+    </ul>
   </div>
 {% endblock %}
 {% endblock %}
