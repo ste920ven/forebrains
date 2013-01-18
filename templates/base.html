@@ -1,28 +1,18 @@
-<!DOCTYPE html>
-
+<!doctype html>
 <head>
-{% block head %}
-<link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
-<script src="/static/js/jquery.js"></script>
-<script src="/static/js/bootstrap.min.js"></script>
-
-<title>{% block title %} default title  {% endblock %} </title>
-
-{% endblock %}
+  {% block head %}
+  <title>{% block title %}Title{% endblock %}</title>
+  <link rel="shortcut icon" href="{{url_for("static", filename="favicon.ico")}}">
+  <style type="text/css">@import "{{url_for("static", filename="css/main.css")}}";</style>
+  <script src="/static/js/jquery.js"></script>
+  {% endblock %}
 </head>
-{% block content %}
-<body>
-<h1>The Title</h1>
-
-<div id="content">
-
-
-This is the base html content block
-<p>
-
-
-</div>
-
-
-</body>
-{% endblock%}
+{% block body %}
+{% block tabs %}
+  <div class="tabs">
+    <ul id="tabnav">
+      <li class="tab1"><a href="{{ url_for('index')}}">Home</a></li>
+      <li class="tab2"><a href="{{url_for('login')}}">Login</a></li>
+  </div>
+{% endblock %}
+{% endblock %}
