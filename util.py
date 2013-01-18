@@ -95,6 +95,11 @@ def setPenatly(game,player,penalty):
     
 def setAlive(game,player,status):
 
+
+def getRankings(game):
+    rankings = []
+    return rankings
+
     
 def addFriend(player,friend):
     tmp = users.find_one({"user":player})

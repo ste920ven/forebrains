@@ -11,8 +11,11 @@ def checkIn(game,player,loc):
   return getLastLoc(game,player)
   
 def score(game,player):
-  
+  score = getKills(game,player) - getPenalty(gmae,player)
+  return score
+
 def end(game):
+  return winners
   
 def penalize(game,player):
   newPenalty = getPenalty(game,player)+1
