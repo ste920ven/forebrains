@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block head %}
+{{ super() }}
+{% block title %}Sign Up{% endblock %}
+{% endblock %}
+
+{% block body %}
+<body>
+{% block tabs %}{{super()}}{% endblock %}
+  <div id="input">
+    <form action="" method="POST">
+      <input type="text" name="Username" class="" placeholder="Choose a username">
+      <input type="text" name="Password" class="" placeholder="Choose a password">
+       <input type="text" name="Password Confirmation" class="" placeholder="Confirm your password">
+      <input type="submit" name="button" value="Sign Up" class=""><br><br>
+    </form>
+  </div>
+</body>
+{% endblock %}
