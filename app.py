@@ -53,6 +53,38 @@ def signup():
         else:
             return render_template("signup.html",taken=True)
 
+@app.route("/creategame",methods=["POST","GET"])
+def creategame():
+    if request.method == "GET":
+        return render_template("creategame.html")
+    else:
+        pending = request.form.keys()[0]
+        if "tab" in pending:
+            return handleTabs(pending)
+        if request.form.has_key("submitgame"):
+            name = str(request.form["name"])
+            password = str(request.form["pass1"])
+            if not util.createGame(session["user"],password,name):
+                return render_template("creategame.html",taken=True)
+            return redirect(url_for("index"))
+
+@app.route("/joingame",methods=["POST","GET"])
+def joingame():
+    if request.method == "GET":
+        return render_template("joingame.html",games=util.getGames())
+    else:
+        pending = request.form.keys()[0]
+        if "tab" in pending:
+            return handleTabs(pending)
+        if request.form.has_key("submitjoin"):
+            name = str(request.form["Gamename"])
+            password = str(request.form["Password"])
+            if util.checkGamePass(name,password):
+                util.addPlayer(name,session["user"])
+                return redirect(url_for("index"))
+            else:
+                return render_template("joingame.html",games=util.getGames())
+
 def handleTabs(pressed):
     if "home" in pressed:
         return redirect(url_for("index"))
@@ -60,6 +92,10 @@ def handleTabs(pressed):
         return redirect(url_for("login"))
     if "signup" in pressed:
         return redirect(url_for("signup"))
+    if "creategame" in pressed:
+        return redirect(url_for("creategame"))
+    if "joingame" in pressed:
+        return redirect(url_for("joingame"))
 
 
 if __name__=="__main__":

@@ -21,17 +21,20 @@ def createUser(user,password):
     return True
 
 def createGame(creator,password,name):
+    if games.find_one({"name":name}) != None:
+        return False
     if password != "":
         tmp = base64.b64encode(password)
     else:
         tmp = False
-    newgame = {"creator" : creator, "pass" : tmp, "name" : name, creator : {"loc":[0,0], "pursuer" : "", "target" : "", "kills" : 0, "live" : False}}
+    newgame = {"creator" : creator, "pass" : tmp, "name" : name, creator : {"loc":[0,0], "pursuer" : "", "target" : "", "kills" : 0, "live" : False, "penalty" : 0, "bonus" : False}}
     games.insert(newgame)
+    return True
 
-def addPlayer(user,game):
-    tmp = games.find_one({"name":game})["players"]
-    tmp[user] = {"loc":[0,0], "pursuer" : "", "target" : "", "kills" : 0, "live" : False}
-    games.update({"name" : game},{"$set" : {"players" : tmp}})
+def addPlayer(game,user):
+    tmp = games.find_one({"name":game})
+    tmp[user] = {"loc":[0,0], "pursuer" : "", "target" : "", "kills" : 0, "live" : False, "penalty" : 0, "bonus" : False}
+    games.update({"name" : game},{"$set" : tmp})
 
 def checkUserPass(user,password):
     encpass = base64.b64encode(password)
@@ -48,6 +51,8 @@ def checkGamePass(game,password):
     tmp = games.find_one({"name":game})
     if tmp == None:
         return 0
+    if tmp["pass"] == False:
+        return True
     if encpass == tmp["pass"]:
         return True
     else:
@@ -67,29 +72,52 @@ def startGame(game):
     games.update({"name":game},{"$set":tmp})
     return True
        
-def getTarget(player,game):
+def getTarget(game,player):
     tmp = games.find_one({"name":game})
     return tmp[player]["target"]
 
-def getPursuer(player,game):
+def getPursuer(game,player):
     tmp = games.find_one({"name":game})
     return tmp[player]["target"]
 
-def isAlive(player,game):
+def isAlive(game,player):
     tmp = games.find_one({"name":game})
     return tmp[player]["live"]
 
-def getKills(player,game):
+def getKills(game,player):
     tmp = games.find_one({"name":game})
     return tmp[player]["kills"]
 
-def getLastLoc(player,game):
+def getLastLoc(game,player):
     tmp = games.find_one({"name":game})
     return tmp[player]["loc"]
-
-def setLoc(player,game,loc):
-    games.update({"name":game},{"$set":{"loc":loc}})
+    
+def getPenaltyTime(game,player):
+    tmp = games.find_one({"name":game})
+    return tmp[player]["penalty"]
+    
+def setLoc(game,player,loc):
+    games.update({"name":game},{"$set":{player:{"loc":loc}}})
     return True
+    
+def setTarget(game,pursuer,target):
+    games.update({"name":game},{"$set":{pursuer:{"target":target}}})
+    games.update({"name":game},{"$set":{target:{"pursuer":pursuer}}})
+    return True
+
+def penalize(game,player):
+    now = time.time()
+    games.update({"name":game},{"$set":{"penalty":now}})
+    pser = games.find_one({"name":game})[player]["pursuer"]
+    games.update({"name":game},{"$set":{pser:{"bonus":True}}})
+    return True
+
+def setLive(game,player,status):
+    games.update({"name":game},{"$set":{player:{"live":status}}})
+
+def getRankings(game):
+    rankings = []
+    return rankings
 
     
 def addFriend(player,friend):
@@ -108,7 +136,12 @@ def getAllLocs(game):
             locations.append(tmp[person]["loc"])
     return locations
 
-                     
+def getGames():
+   tmp = games.find()
+   keys = []
+   for game in tmp:
+       keys.append(str(game["name"]))
+   return keys
         
 
 #encode password for check

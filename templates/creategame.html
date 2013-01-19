@@ -12,23 +12,20 @@
 <table>
   <tr>
 		<td align = "right">Choose a game name:</td>
-		<td><input type="text" name="user" size="50"></td>
+		<td><input type="text" name="name" size="50"></td>
 	</tr>
 	<tr>
-		<td align = "right">Choose a password for the game:</td>
+		<td align = "right">Choose a password for the game[leave blank for public game]:</td>
 		<td><input type="text" name="pass1" size="50"></td>
 	</tr>
 </table>
 
-<input type="submit" name="submit" value="Submit">
-<input type="submit" name="back" value="Back"
+<input type="submit" name="submitgame" value="Submit">
+<input type="submit" name="back" value="Back">
 </center>
 </form>
 {% if taken %}
-This username is already taken.
-{% endif %}
-{% if notmatching %}
-Passwords do not match.
+There is a game that exists with this name.
 {% endif %}
 </body>
 </html>
