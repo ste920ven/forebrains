@@ -4,6 +4,9 @@ import urllib2,json,util
 app=Flask(__name__)
 app.secret_key = "JackStevenDinaandBiggsAreAwesomeExceptNotReallyDina1"
 
+@app.route("/"):
+def home:
+    render_template("home.html")
 @app.route("/game/*name*",methods=["POST","GET"])
 def index(name):
     if request.method=="GET":
