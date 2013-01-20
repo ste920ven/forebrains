@@ -4,8 +4,8 @@ import urllib2,json,util
 app=Flask(__name__)
 app.secret_key = "JackStevenDinaandBiggsAreAwesomeExceptNotReallyDina1"
 
-@app.route("/"):
-def home:
+@app.route("/")
+def home():
     render_template("home.html")
 @app.route("/game/*name*",methods=["POST","GET"])
 def index(name):
@@ -49,7 +49,13 @@ def signup():
             return handleTabs(pending)
         user = str(request.form["user"])
         password = str(request.form["pass1"])
-        if password != str(request.form["pass2"]):
+        if request.form.has_key("back"):
+            return redirect(url_for("index"))
+        if user == "":
+            return render_template("signup.html",nouser=True)
+        if password == "":
+            return render_template("signup.html",nopassword=True)
+        elif password != str(request.form["pass2"]):
             return render_template("signup.html",notmatching=True)
         if util.createUser(user,password):
             return redirect(url_for("login"))
@@ -64,6 +70,8 @@ def creategame():
         pending = request.form.keys()[0]
         if "tab" in pending:
             return handleTabs(pending)
+        if request.form.has_key("back"):
+            return redirect(url_for("index"))
         if request.form.has_key("submitgame"):
             name = str(request.form["name"])
             password = str(request.form["pass1"])
@@ -110,9 +118,10 @@ def updatelocation():
     util.setLoc(game,player, [xcor, ycor])
     return True
 
+
+@app.route("/getCurrentUser")
 def getCurrentUser():
     return session["user"]
-
 
 if __name__=="__main__":
     app.debug=True
