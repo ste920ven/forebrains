@@ -20,9 +20,12 @@
 	  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCkAobHK_oI7cOW4qdc1iUCVFSl20Ev3k&sensor=false">
   </script>
   <script src="/static/js/googlemaps.js"></script>
+  <br>
   <button name="checkin">Check-In</button>
   <button name="kill">Assissinate</button>
   <ul>
+    {% for player in players %}
+    {% endfor %}
   </ul>
 <body onload="initialize()">
   <div id="map_canvas"></div>
