@@ -106,6 +106,10 @@ def updatelocation():
     util.setLoc(game,player, [xcor, ycor])
     return True
 
+@app.route("/signup")
+def signup():
+    return render_template("signup.html")
+
 if __name__=="__main__":
     app.debug=True
     app.run()
