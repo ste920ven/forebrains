@@ -97,6 +97,14 @@ def handleTabs(pressed):
     if "joingame" in pressed:
         return redirect(url_for("joingame"))
 
+@app.route("/updatelocation")
+def updatelocation():
+    game = request.args.get('game', '')
+    player = request.args.get('player', '')
+    xcor = request.args.get('xcor', '-1')
+    ycor = request.args.get('ycor', '-1')
+    util.setLoc(game,player, [xcor, ycor])
+    return True
 
 if __name__=="__main__":
     app.debug=True
