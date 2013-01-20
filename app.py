@@ -114,6 +114,8 @@ def updatelocation():
     util.setLoc(game,player, [xcor, ycor])
     return True
 
+
+@app.route("/getCurrentUser")
 def getCurrentUser():
     return session["user"]
 
