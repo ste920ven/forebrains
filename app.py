@@ -4,10 +4,13 @@ import urllib2,json,util
 app=Flask(__name__)
 app.secret_key = "JackStevenDinaandBiggsAreAwesomeExceptNotReallyDina1"
 
-@app.route("/",methods=["POST","GET"])
-def index():
+@app.route("/"):
+def home:
+    render_template("home.html")
+@app.route("/game/*name*",methods=["POST","GET"])
+def index(name):
     if request.method=="GET":
-        return render_template("index.html")
+        return render_template("index.html",players=util.getPlayers(name))
     else:
         pending = request.form.keys()[0]
         if "tab" in pending:
@@ -89,7 +92,8 @@ def joingame():
             password = str(request.form["Password"])
             if util.checkGamePass(name,password):
                 util.addPlayer(name,session["user"])
-                return redirect(url_for("index"))
+                session["game"] = name               
+                return redirect(url_for("game",name=name))
             else:
                 return render_template("joingame.html",games=util.getGames())
 
