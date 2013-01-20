@@ -24,6 +24,9 @@ def game(name):
         pending = request.form.keys()[0]
         if "tab" in pending:
             return handleTabs(pending)
+        if request.form.has_key("startgame"):
+            util.startGame(session["game"])
+            return render_template("index.html",players=util.getPlayers(name),creator=True)
 
 @app.route("/login",methods=["POST","GET"])
 def login():
