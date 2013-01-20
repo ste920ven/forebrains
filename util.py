@@ -142,8 +142,11 @@ def getGames():
    for game in tmp:
        keys.append(str(game["name"]))
    return keys
-        
 
-#encode password for check
+def getPlayers(game):
+    tmp = games.find_one({"name":game})
+    players = tmp.keys()
+    for player in players:
+        return
 
     
