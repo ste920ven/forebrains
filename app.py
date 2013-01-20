@@ -46,7 +46,13 @@ def signup():
             return handleTabs(pending)
         user = str(request.form["user"])
         password = str(request.form["pass1"])
-        if password != str(request.form["pass2"]):
+        if request.form.has_key("back"):
+            return redirect(url_for("index"))
+        if user == "":
+            return render_template("signup.html",nouser=True)
+        if password == "":
+            return render_template("signup.html",nopassword=True)
+        elif password != str(request.form["pass2"]):
             return render_template("signup.html",notmatching=True)
         if util.createUser(user,password):
             return redirect(url_for("login"))
@@ -61,6 +67,8 @@ def creategame():
         pending = request.form.keys()[0]
         if "tab" in pending:
             return handleTabs(pending)
+        if request.form.has_key("back"):
+            return redirect(url_for("index"))
         if request.form.has_key("submitgame"):
             name = str(request.form["name"])
             password = str(request.form["pass1"])
