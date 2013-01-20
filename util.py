@@ -151,7 +151,7 @@ def getPlayers(game):
     players = tmp.keys()
     for player in players:
         current = 0
-        exceptions = ["creator","pass","name","id"]
+        exceptions = ["creator","pass","name","_id"]
         for person in players:
             if person in exceptions:
                 players.remove(person)   
