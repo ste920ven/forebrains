@@ -34,7 +34,7 @@ def createGame(creator,password,name):
 def addPlayer(game,user):
     tmp = games.find_one({"name":game})
     tmp[user] = {"loc":[0,0], "pursuer" : "", "target" : "", "kills" : 0, "live" : False, "penalty" : 0, "bonus" : False}
-    games.update({"name" : game},{"$set" : tmp})
+    games.update({"name" : game},tmp)
 
 def checkUserPass(user,password):
     encpass = base64.b64encode(password)
@@ -69,7 +69,7 @@ def startGame(game):
         tmp[person]["target"] = players[current+1]
         tmp[players[current+1]]["pursuer"] = person
         current = current + 1
-    games.update({"name":game},{"$set":tmp})
+    games.update({"name":game},tmp)
     return True
        
 def getTarget(game,player):
@@ -142,8 +142,11 @@ def getGames():
    for game in tmp:
        keys.append(str(game["name"]))
    return keys
-        
 
-#encode password for check
+def getPlayers(game):
+    tmp = games.find_one({"name":game})
+    players = tmp.keys()
+    for player in players:
+        return
 
     

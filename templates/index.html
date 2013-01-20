@@ -3,6 +3,7 @@
 
 {% block head %}
 {{ super() }}
+{% block tabs %}{{super()}}{% endblock %}
 {% block title %}Assassin{% endblock %}
 {% endblock %}
 {% block body %}
@@ -13,27 +14,20 @@
     #map_canvas { height: 75%; width:50%;}
   </style>
 <body>
-    <div id="field" style="width:100%; height:100%"></div>
+    <div id="field" style="width:75%; height:50%"></div>
   </body>
   <script type="text/javascript"
 	  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCkAobHK_oI7cOW4qdc1iUCVFSl20Ev3k&sensor=false">
   </script>
   <script src="/static/js/googlemaps.js"></script>
-  <script type="text/javascript">
-    /*
-    function initialize() {
-       var mapOptions = {
-          center: new google.maps.LatLng(40.7184, -74.011),
-          zoom: 8,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-       };
-       var map = new google.maps.Map(document.getElementById("map_canvas"),
-          mapOptions);
-    }
-   */
-  </script>
+  <br>
+  <button name="checkin">Check-In</button>
+  <button name="kill">Assissinate</button>
+  <ul>
+    {% for player in players %}
+    {% endfor %}
+  </ul>
 <body onload="initialize()">
-  {% block tabs %}{{super()}}{% endblock %}
   <div id="map_canvas"></div>
 </body>
 {% endblock %}
