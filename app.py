@@ -106,15 +106,8 @@ def updatelocation():
     util.setLoc(game,player, [xcor, ycor])
     return True
 
-<<<<<<< HEAD
-@app.route("/signup")
-def signup():
-    return render_template("signup.html")
-=======
 def getCurrentUser():
     return session["user"]
-
->>>>>>> biggs
 
 if __name__=="__main__":
     app.debug=True
