@@ -31,8 +31,14 @@
 {% if taken %}
 This username is already taken.
 {% endif %}
+{% if nouser %}
+Please enter a username.
+{% endif %}
 {% if notmatching %}
 Passwords do not match.
+{% endif %}
+{% if nopassword %}
+Please enter a password.
 {% endif %}
 </body>
 </html>
