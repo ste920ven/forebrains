@@ -106,6 +106,10 @@ def updatelocation():
     util.setLoc(game,player, [xcor, ycor])
     return True
 
+def getCurrentUser():
+    return session["user"]
+
+
 if __name__=="__main__":
     app.debug=True
     app.run()
