@@ -17,7 +17,7 @@ function getLocation(e)
 	var opts= {'enableHighAccuracy':true,
 		   'timeout':10000,
 		   'maximumAge':0};
-	navigator.geolocation.getCurrentPosition(f,function(){},opts);
+	navigator.geolocation.getCurrentPosition(e,function(){},opts);
     }
     else{field.innerHTML="Geolocation is not supported by this browser.";}
 }
