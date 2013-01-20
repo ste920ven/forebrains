@@ -69,7 +69,7 @@ def startGame(game):
         tmp[person]["target"] = players[current+1]
         tmp[players[current+1]]["pursuer"] = person
         current = current + 1
-    games.update({"name":game},{"$set":tmp})
+    games.update({"name":game},tmp)
     return True
        
 def getTarget(game,player):
