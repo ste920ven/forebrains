@@ -1,7 +1,18 @@
-<h1>Login</h1>
+{% extends "base.html" %}
+{% block head %}
+{{ super() }}
+{% block title %}Login{% endblock %}
+{% endblock %}
 
-
-<form action="" method="POST">
-<textarea name="Username" class="" placeholder="Type your username"></textarea>
-<textarea name="Password" class="" placeholder="Type your password"></textarea>
-<input type="submit" name="button" value="Login" class=""><br><br>
+{% block body %}
+<body>
+{% block tabs %}{{super()}}{% endblock %}
+  <div id="input">
+    <form action="" method="POST">
+      <input type="text" name="Username" class="" placeholder="Type your username"></textarea>
+      <input type="password" name="Password" class="" placeholder="Type your password" ></textarea>
+      <input type="submit" name="submitlogin" value="Login" class=""><br><br>
+    </form>
+  </div>
+</body>
+{% endblock %}

@@ -1,10 +1,8 @@
-<!doctype html>
+{% extends "base.html" %}
 
-<head>
-  <title>Assassin</title>
-  <link rel="shortcut icon" href="{{url_for("static", filename="favicon.ico")}}">
-  <style type="text/css">@import "{{url_for("static", filename="css/main.css")}}";</style>
-  <script src="/static/js/jquery.js"></script>
+{% block head %}
+{{ super() }}
+{% block title %}Assassin{% endblock %}
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
   <style type="text/css">
     html { height: 100% }
@@ -25,11 +23,10 @@
           mapOptions);
     }
   </script>
-</head>
+{% endblock %}
+{% block body %}
 <body onload="initialize()">
-  <div class="tab">
-    <div class="hometab">Home</div>
-    <div class="logintab">Login</div>
-  </div>
+  {% block tabs %}{{super()}}{% endblock %}
   <div id="map_canvas"></div>
 </body>
+{% endblock %}
