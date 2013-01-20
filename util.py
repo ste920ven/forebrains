@@ -156,4 +156,5 @@ def getPlayers(game):
             if person in exceptions:
                 players.remove(person)   
     return players
+
     
