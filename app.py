@@ -4,11 +4,17 @@ import urllib2,json,util
 app=Flask(__name__)
 app.secret_key = "JackStevenDinaandBiggsAreAwesomeExceptNotReallyDina1"
 
-@app.route("/")
+@app.route("/",methods=["POST","GET"])
 def home():
-    render_template("home.html")
-@app.route("/game/*name*",methods=["POST","GET"])
-def index(name):
+    if request.method=="GET":
+        return render_template("home.html")
+    else:
+        pending = request.form.keys()[0]
+        if "tab" in pending:
+            return handleTabs(pending)
+
+@app.route("/game/<name>",methods=["POST","GET"])
+def game(name):
     if request.method=="GET":
         return render_template("index.html",players=util.getPlayers(name))
     else:
@@ -34,7 +40,7 @@ def login():
                     return render_template("login.html")
                 if validate == True:
                     session['user'] = user
-                    return redirect(url_for("index"))
+                    return redirect(url_for("home"))
                 if validate == False:
                     #Password Incorrect
                     return render_template("login.html")
@@ -50,7 +56,7 @@ def signup():
         user = str(request.form["user"])
         password = str(request.form["pass1"])
         if request.form.has_key("back"):
-            return redirect(url_for("index"))
+            return redirect(url_for("home"))
         if user == "":
             return render_template("signup.html",nouser=True)
         if password == "":
@@ -71,13 +77,13 @@ def creategame():
         if "tab" in pending:
             return handleTabs(pending)
         if request.form.has_key("back"):
-            return redirect(url_for("index"))
+            return redirect(url_for("home"))
         if request.form.has_key("submitgame"):
             name = str(request.form["name"])
             password = str(request.form["pass1"])
             if not util.createGame(session["user"],password,name):
                 return render_template("creategame.html",taken=True)
-            return redirect(url_for("index"))
+            return redirect(url_for("index",name=name))
 
 @app.route("/joingame",methods=["POST","GET"])
 def joingame():
@@ -99,7 +105,7 @@ def joingame():
 
 def handleTabs(pressed):
     if "home" in pressed:
-        return redirect(url_for("index"))
+        return redirect(url_for("home"))
     if "login" in pressed:
         return redirect(url_for("login"))
     if "signup" in pressed:

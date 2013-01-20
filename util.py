@@ -63,7 +63,7 @@ def startGame(game):
     players = tmp.keys()
     random.shuffle(players)
     current = 0
-    exceptions = ["creator","pass","name"]
+    exceptions = ["creator","pass","name","_id"]
     for person in players:
         if person in exceptions:
             players.remove(person)
@@ -151,7 +151,7 @@ def getPlayers(game):
     players = tmp.keys()
     for player in players:
         current = 0
-        exceptions = ["creator","pass","name"]
+        exceptions = ["creator","pass","name","id"]
         for person in players:
             if person in exceptions:
                 players.remove(person)   
