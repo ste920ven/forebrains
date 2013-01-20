@@ -1,19 +1,38 @@
-{% extends "base.html" %}
-{% block head %}
-{{ super() }}
-{% block title %}Sign Up{% endblock %}
-{% endblock %}
-
-{% block body %}
+<!DOCTYPE html>
+<html>
+<header>
+<title> Create Account </title>
+<link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css">
+<!-- <link href='http://fonts.googleapis.com/css?family=Kite+One' rel='stylesheet' type='text/css'> -->
+</header>
 <body>
-{% block tabs %}{{super()}}{% endblock %}
-  <div id="input">
-    <form action="" method="POST">
-      <input type="text" name="Username" class="" placeholder="Choose a username">
-      <input type="text" name="Password" class="" placeholder="Choose a password">
-       <input type="text" name="Password Confirmation" class="" placeholder="Confirm your password">
-      <input type="submit" name="button" value="Sign Up" class=""><br><br>
-    </form>
-  </div>
+<center>
+<h1> Create your new Assassin Account </h1>
+<form action="" method="POST">
+<table>
+  <tr>
+		<td align = "right">Choose a username:</td>
+		<td><input type="text" name="user" size="50"></td>
+	</tr>
+	<tr>
+		<td align = "right">Choose a password:</td>
+		<td><input type="password" name="pass1" size="50"></td>
+	</tr>
+	<tr>
+		<td align = "right">Re-Enter password:</td>
+		<td><input type="password" name="pass2" size="50"></td>
+	</tr>
+</table>
+
+<input type="submit" name="submit" value="Submit">
+<input type="submit" name="back" value="Back"
+</center>
+</form>
+{% if taken %}
+This username is already taken.
+{% endif %}
+{% if notmatching %}
+Passwords do not match.
+{% endif %}
 </body>
-{% endblock %}
+</html>
