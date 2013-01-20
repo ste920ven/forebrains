@@ -23,6 +23,9 @@
   <br>
   <button name="checkin">Check-In</button>
   <button name="kill">Assassinate</button>
+  {% if creator %}
+  <button name="startgame">Start Game</button>
+  {% endif %}
   <ul>
     {% for player in players %}
     <li> {{player}} </li>

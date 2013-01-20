@@ -16,7 +16,10 @@ def home():
 @app.route("/game/<name>",methods=["POST","GET"])
 def game(name):
     if request.method=="GET":
-        return render_template("index.html",players=util.getPlayers(name))
+        if session["user"] == util.getCreator(name):
+            return render_template("index.html",players=util.getPlayers(name),creator=True)
+        else:
+            return render_template("index.html",player=util.getPlayers(name))
     else:
         pending = request.form.keys()[0]
         if "tab" in pending:
@@ -131,4 +134,4 @@ def getCurrentUser():
 
 if __name__=="__main__":
     app.debug=True
-    app.run()
+    app.run('0.0.0.0')

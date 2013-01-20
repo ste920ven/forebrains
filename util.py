@@ -157,4 +157,8 @@ def getPlayers(game):
                 players.remove(person)   
     return players
 
+def getCreator(game):
+    tmp = games.find_one({"name":game})
+    return tmp["creator"]
+
     
