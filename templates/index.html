@@ -21,10 +21,16 @@
   </script>
   <script src="/static/js/googlemaps.js"></script>
   <br>
+  <form action="" method="POST">
   <button name="checkin">Check-In</button>
+  </form>
+  <form action="" method="POST">
   <button name="kill">Assassinate</button>
+  </form>
   {% if creator %}
+  <form action="" method="POST">
   <button name="startgame">Start Game</button>
+  </form>
   {% endif %}
   <ul>
     {% for player in players %}
