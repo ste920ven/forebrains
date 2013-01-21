@@ -1,11 +1,11 @@
-<!DOCTYPE html>
-<html>
-<header>
-<title> Create Game </title>
-<link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css">
-<!-- <link href='http://fonts.googleapis.com/css?family=Kite+One' rel='stylesheet' type='text/css'> -->
-</header>
+{% extends "base.html" %}
+{% block head %}
+{{ super() }}
+{% block title %}Create Game{% endblock %}
+{% endblock %}
+{% block body %}
 <body>
+{% block tabs %}{{super()}}{% endblock %}
 <center>
 <h1> Create a New Game of Assassin </h1>
 <form action="" method="POST">
@@ -28,4 +28,4 @@
 There is a game that exists with this name.
 {% endif %}
 </body>
-</html>
+{% endblock %}
