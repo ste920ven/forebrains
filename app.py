@@ -94,20 +94,23 @@ def creategame():
 @app.route("/joingame",methods=["POST","GET"])
 def joingame():
     if request.method == "GET":
-        return render_template("joingame.html",games=util.getGames())
+        return render_template("joingame.html",games=util.getGameInfos())
     else:
         pending = request.form.keys()[0]
         if "tab" in pending:
             return handleTabs(pending)
         if request.form.has_key("submitjoin"):
+            print request.form
             name = str(request.form["Gamename"])
+            print "b"
             password = str(request.form["Password"])
+            print "c"
             if util.checkGamePass(name,password):
                 util.addPlayer(name,session["user"])
                 session["game"] = name               
                 return redirect(url_for("game",name=name))
             else:
-                return render_template("joingame.html",games=util.getGames())
+                return render_template("joingame.html",games=util.getGameInfos(),)
 
 def handleTabs(pressed):
     if "home" in pressed:
