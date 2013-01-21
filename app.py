@@ -5,13 +5,28 @@ app=Flask(__name__)
 app.secret_key = "JackStevenDinaandBiggsAreAwesomeExceptNotReallyDina1"
 
 @app.route("/",methods=["POST","GET"])
-def index():
+def home():
     if request.method=="GET":
-        return render_template("index.html")
+        return render_template("home.html")
     else:
         pending = request.form.keys()[0]
         if "tab" in pending:
             return handleTabs(pending)
+
+@app.route("/game/<name>",methods=["POST","GET"])
+def game(name):
+    if request.method=="GET":
+        if session["user"] == util.getCreator(name):
+            return render_template("index.html",players=util.getPlayers(name),creator=True)
+        else:
+            return render_template("index.html",player=util.getPlayers(name))
+    else:
+        pending = request.form.keys()[0]
+        if "tab" in pending:
+            return handleTabs(pending)
+        if request.form.has_key("startgame"):
+            util.startGame(session["game"])
+            return render_template("index.html",players=util.getPlayers(name),creator=True)
 
 @app.route("/login",methods=["POST","GET"])
 def login():
@@ -31,7 +46,7 @@ def login():
                     return render_template("login.html")
                 if validate == True:
                     session['user'] = user
-                    return redirect(url_for("index"))
+                    return redirect(url_for("home"))
                 if validate == False:
                     #Password Incorrect
                     return render_template("login.html")
@@ -46,7 +61,13 @@ def signup():
             return handleTabs(pending)
         user = str(request.form["user"])
         password = str(request.form["pass1"])
-        if password != str(request.form["pass2"]):
+        if request.form.has_key("back"):
+            return redirect(url_for("home"))
+        if user == "":
+            return render_template("signup.html",nouser=True)
+        if password == "":
+            return render_template("signup.html",nopassword=True)
+        elif password != str(request.form["pass2"]):
             return render_template("signup.html",notmatching=True)
         if util.createUser(user,password):
             return redirect(url_for("login"))
@@ -61,33 +82,39 @@ def creategame():
         pending = request.form.keys()[0]
         if "tab" in pending:
             return handleTabs(pending)
+        if request.form.has_key("back"):
+            return redirect(url_for("home"))
         if request.form.has_key("submitgame"):
             name = str(request.form["name"])
             password = str(request.form["pass1"])
             if not util.createGame(session["user"],password,name):
                 return render_template("creategame.html",taken=True)
-            return redirect(url_for("index"))
+            return redirect(url_for("index",name=name))
 
 @app.route("/joingame",methods=["POST","GET"])
 def joingame():
     if request.method == "GET":
-        return render_template("joingame.html",games=util.getGames())
+        return render_template("joingame.html",games=util.getGameInfos())
     else:
         pending = request.form.keys()[0]
         if "tab" in pending:
             return handleTabs(pending)
         if request.form.has_key("submitjoin"):
+            print request.form
             name = str(request.form["Gamename"])
+            print "b"
             password = str(request.form["Password"])
+            print "c"
             if util.checkGamePass(name,password):
                 util.addPlayer(name,session["user"])
-                return redirect(url_for("index"))
+                session["game"] = name               
+                return redirect(url_for("game",name=name))
             else:
-                return render_template("joingame.html",games=util.getGames())
+                return render_template("joingame.html",games=util.getGameInfos(),)
 
 def handleTabs(pressed):
     if "home" in pressed:
-        return redirect(url_for("index"))
+        return redirect(url_for("home"))
     if "login" in pressed:
         return redirect(url_for("login"))
     if "signup" in pressed:
@@ -106,9 +133,10 @@ def updatelocation():
     util.setLoc(game,player, [xcor, ycor])
     return True
 
+@app.route("/getCurrentUser")
 def getCurrentUser():
     return session["user"]
 
 if __name__=="__main__":
     app.debug=True
-    app.run()
+    app.run('0.0.0.0')
