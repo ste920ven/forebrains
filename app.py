@@ -19,7 +19,7 @@ def game(name):
         if session["user"] == util.getCreator(name):
             return render_template("index.html",players=util.getPlayers(name),creator=True)
         else:
-            return render_template("index.html",player=util.getPlayers(name))
+            return render_template("index.html",players=util.getPlayers(name),ceator=False)
     else:
         pending = request.form.keys()[0]
         if "tab" in pending:
@@ -100,14 +100,11 @@ def joingame():
         if "tab" in pending:
             return handleTabs(pending)
         if request.form.has_key("submitjoin"):
-            print request.form
             name = str(request.form["Gamename"])
-            print "b"
             password = str(request.form["Password"])
-            print "c"
             if util.checkGamePass(name,password):
                 util.addPlayer(name,session["user"])
-                session["game"] = name               
+                session["game"] = name 
                 return redirect(url_for("game",name=name))
             else:
                 return render_template("joingame.html",games=util.getGameInfos(),)
@@ -126,10 +123,13 @@ def handleTabs(pressed):
 
 @app.route("/updatelocation")
 def updatelocation():
-    xcor = request.args.get('xcor', '-1')
-    ycor = request.args.get('ycor', '-1')
+    xcor = request.args.get('xcor', '-1',type=float)
+    ycor = request.args.get('ycor', '-1',type=float)
     util.setLoc(session["game"] ,session["user"], [xcor, ycor])
-    return
+    if session["user"] == util.getCreator(session["game"]):
+        return render_template("index.html",players=util.getPlayers(session["game"]),creator=True)
+    else:
+        return render_template("index.html",player=util.getPlayers(session["game"]))
 
 @app.route("/getCurrentUser")
 def getCurrentUser():
@@ -151,6 +151,9 @@ def getPursuer():
 
 @app.route("/getTargetLocation")
 def getTargetLocation():
+    print "here"
+    print session["user"]
+    print "here2"
     location = util.getLoc(session["game"], util.getTarget(session["game"], session["user"]));
     return json.dumps(location)
 
@@ -158,6 +161,10 @@ def getTargetLocation():
 def getPursuerLoaction():
     location = util.getLoc(session["game"], util.getPursuer(session["game"], session["user"]));
     return json.dumps(location)
+
+@app.route("/started")
+def started():
+    return json.dumps(util.gameStarted(session["game"]))
 
 if __name__=="__main__":
     app.debug=True

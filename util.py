@@ -27,7 +27,7 @@ def createGame(creator,password,name):
         tmp = base64.b64encode(password)
     else:
         tmp = False
-    newgame = {"creator" : creator, "pass" : tmp, "name" : name, creator : {"loc":[0,0], "pursuer" : "", "target" : "", "kills" : 0, "live" : False, "penalty" : 0, "bonus" : False}}
+    newgame = {"creator" : creator, "pass" : tmp, "name" : name, "started" : False, creator : {"loc":[0,0], "pursuer" : "", "target" : "", "kills" : 0, "live" : False, "penalty" : 0, "bonus" : False}}
     games.insert(newgame)
     return True
 
@@ -63,18 +63,25 @@ def startGame(game):
     players = tmp.keys()
     random.shuffle(players)
     current = 0
-    exceptions = ["creator","pass","name","_id"]
+    exceptions = ["creator","pass","name","_id","started"]
+    toremove = []
+    for exception in exceptions:
+        players.remove(exception)
+    print players
     for person in players:
-        if person in exceptions:
-            players.remove(person)
-        else:
-            if current == len(players):
-                current = -1
-            currentplus = current + 1
-            tmp[players[current+1]]["pursuer"] = person
-            current = current + 1
-            games.update({"name":game},tmp)
+        if current == len(players) - 1:
+            current = -1
+        currentplus = current + 1
+        tmp[players[currentplus]]["pursuer"] = person
+        tmp[person]["target"] = players[currentplus]
+        current = current + 1
+    tmp["started"] = True
+    games.update({"name":game},tmp)
     return True
+
+def gameStarted(game):
+    tmp = games.find_one({"name":game})
+    return tmp["started"]
        
 def getTarget(game,player):
     tmp = games.find_one({"name":game})
@@ -86,7 +93,7 @@ def getLoc(game, player):
 
 def getPursuer(game,player):
     tmp = games.find_one({"name":game})
-    return tmp[player]["target"]
+    return tmp[player]["pursuer"]
 
 def isAlive(game,player):
     tmp = games.find_one({"name":game})
@@ -105,7 +112,9 @@ def getPenaltyTime(game,player):
     return tmp[player]["penalty"]
     
 def setLoc(game,player,loc):
-    games.update({"name":game},{"$set":{player:{"loc":loc}}})
+    tmp = games.find_one({"name":game})[player]
+    tmp["loc"] = loc
+    games.update({"name":game},{"$set":{player:tmp}})
     return True
     
 def setTarget(game,pursuer,target):
@@ -138,7 +147,7 @@ def getAllLocs(game):
     locations = []
     tmp = games.find_one({"name":game})
     k = tmp.keys()
-    invalids = ["creator","pass","name"]
+    invalids = ["creator","pass","name","_id","started"]
     for person in k:
         if person not in invalids:
             locations.append(tmp[person]["loc"])
@@ -156,7 +165,7 @@ def getPlayers(game):
     players = tmp.keys()
     for player in players:
         current = 0
-        exceptions = ["creator","pass","name","_id"]
+        exceptions = ["creator","pass","name","_id","started"]
         for person in players:
             if person in exceptions:
                 players.remove(person)   

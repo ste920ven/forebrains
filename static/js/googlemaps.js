@@ -33,14 +33,19 @@ function getLocation(e)
     }
     else{field.innerHTML="Geolocation is not supported by this browser.";}
 }
-
-
+ var gamestarted = false;
 function makeMap(position)
 {
     lat = position.coords.latitude;
     lng = position.coords.longitude;
     console.log(lat);
     console.log(lng);
+    $.ajaxSetup({
+	async: false
+    });
+    $.getJSON("/started",function(data){
+	gamestarted = data;
+    });   
     $.getJSON("/updatelocation",{xcor:lat,ycor:lng},function(){});
     var mapOptions = {
 	center: new google.maps.LatLng(lat,lng),
@@ -59,8 +64,10 @@ function makeMap(position)
 	position: myLatlng,
 	map: map,
 	title:"YOU : " + player
-    });
+	    });
     setInterval(updateYourMarker,500);
+    if (gamestarted) {
+	console.log("here1");
     $.getJSON("/getTargetLocation", function (data) {
 	targetLat = data[0];
 	targetLng = data[1];
@@ -70,7 +77,9 @@ function makeMap(position)
 	    map: map,
 	    title: "TARGET"
 	});
-    });
+    });};
+    if (gamestarted){
+	console.log("here2");
     $.getJSON("/getPursuerLocation", function (data) {
 	pursuerLat = data[0];
 	pursuerLng = data[1];
@@ -80,7 +89,7 @@ function makeMap(position)
 	    map: map,
 	    title: "PURSUER"
 	});
-    });
+    });};
     
 }
 
