@@ -4,7 +4,7 @@
 		   font-size:13;
 		  }
 
-body              {background:url('../bedge_grunge.png');
+body              {background:url('../wood_1.png');
 		  }
 
 .button           {border-style:solid;
@@ -15,15 +15,13 @@ body              {background:url('../bedge_grunge.png');
 
 ul#tabnav         { /* general settings */
                    text-align: left; /* set to left, right or center */
-		   margin: 1em 0 1em 0; /* set margins as desired */
-		   text-shadow: 0.05em 0.05em 0.2em black;
-		   /*font: bold 11px verdana, arial, sans-serif; /* set font as desired */
-		   border-bottom: 2px solid #810000; /* set border COLOR as desired */
+		   margin: 1em 0; /* set margins as desired */
+		   border-bottom: 2px solid black; /* set border COLOR as desired */
 		   list-style-type: none;
 		   padding: 3px 10px 3px 10px; /* THIRD number must change with respect to padding-top (X) below */
                    }
 
-ul#tabnav li      { /* do not change */
+ul#tabnav li       { /* do not change */
                    display: inline;
                    }
 
@@ -43,37 +41,44 @@ body#tab1 li.tab1 button, body#tab2 li.tab2 button, body#tab3 li.tab3 button, bo
                    }
 
 ul#tabnav li button { /* settings for all tab links */
-                   padding: 3px 4px; /* set padding (tab size) as desired; FIRST number must change with respect to padding-top (X) above */
+                   padding: 5px 8px; /* set padding (tab size) as desired; FIRST number must change with respect to padding-top (X) above */
 		   border: 1px solid black; /* set border COLOR as desired; usually matches border color specified in #tabnav */
-		   background-color: #810000; /* set unselected tab background color as desired */
-		   color: #ffffff; /* set unselected tab link color as desired */
+		   border-top-right-radius:4px;
+		   border-top-left-radius:4px;
+		   background-image:url('../bedge_grunge.png');
+		   color: black; /* set unselected tab color as desired */
 		   margin-right: 0px; /* set additional spacing between tabs as desired */
 		   text-decoration: none;
 		   border-bottom: none;
+		   font-size: 20px;
                    }
 
-ul#tabnav a:hover  { /* settings for hover effect */
+ul#tabnav form button:hover  { /* settings for hover effect */
                     background: #a74d4d; /* set desired hover color */
                    }
 
 /* end css tabs. credit Joshua Kaufman of unraveled.com */
 
-form {
-display: inline;
-}
+form               {
+                    display: inline;
+                   }
 
-#input{
-margin:5px;
-width:100%
-}
+div#content        {
+                   background-image:url('../bedge_grunge.png');
+		   }
 
-.awaitinggame {
-border-style:solid;
-border-width:2px;
-border-color:red;
-padding:5px;
-}
+#input             {
+                   margin:5px;
+		   width:100%
+                   }
+
+.awaitinggame      {
+                   border-style:solid;
+		   border-width:2px;
+		   border-color:red;
+		   padding:5px;
+                   }
 
 .awaitinggame gamename{
-width:500px
-}
+                   width:500px
+                   }

@@ -3,21 +3,13 @@
 {% block title %}Assassin{% endblock %}
 {% block head %}
 {{ super() }}
-{% block tabs %}{{super()}}{% endblock %}
+<script type="text/javascript"
+	  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCkAobHK_oI7cOW4qdc1iUCVFSl20Ev3k&sensor=false"></script>
 {% endblock %}
+{% block tabs %}{{super()}}{% endblock %}
 {% block body %}
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-  <style type="text/css">
-    html { height: 100% }
-    body { height: 100%; margin: 0; padding: 0 }
-    #map_canvas { height: 75%; width:50%;}
-  </style>
-<body>
     <div id="field" style="width:75%; height:50%"></div>
-
-  <script type="text/javascript"
-	  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCkAobHK_oI7cOW4qdc1iUCVFSl20Ev3k&sensor=false">
-  </script>
   <script src="/static/js/googlemaps.js"></script>
   <br>
   <form action="" method="POST">
@@ -36,6 +28,4 @@
     <li> {{player}} </li>
     {% endfor %}
   </ul>
-</body>
-
 {% endblock %}

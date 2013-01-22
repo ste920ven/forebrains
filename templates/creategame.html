@@ -1,11 +1,8 @@
 {% extends "base.html" %}
 {% block title %}Create Game{% endblock %}
-{% block head %}
-{{ super() }}
-{% endblock %}
-{% block body %}
-<body>
+{% block head %}{{ super() }}{% endblock %}
 {% block tabs %}{{super()}}{% endblock %}
+{% block body %}
 <center>
 <h1> Create a New Game of Assassin </h1>
 <form action="" method="POST">
@@ -27,5 +24,4 @@
 {% if taken %}
 There is a game that exists with this name.
 {% endif %}
-</body>
 {% endblock %}

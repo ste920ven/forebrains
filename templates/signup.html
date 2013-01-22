@@ -3,10 +3,8 @@
 {% block head %}
 {{ super() }}
 {% endblock %}
-
-{% block body %}
-<body>
 {% block tabs %}{{super()}}{% endblock %}
+{% block body %}
 <center>
 <h1> Create your new Assassin Account </h1>
 <form action="" method="POST">
@@ -41,5 +39,4 @@ Passwords do not match.
 {% if nopassword %}
 Please enter a password.
 {% endif %}
-</body>
 {% endblock %}

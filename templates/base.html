@@ -8,9 +8,9 @@
   <script src="/static/js/jquery.js"></script>
   {% endblock %}
 </head>
-{% block body %}
+<body>
 {% block tabs %}
-  <div class="tabs">
+  <div id="tabs">
     <ul id="tabnav">
       <form action="" method="POST">
       <li class="tab1"><button name="tabhome">Home</button></li>
@@ -30,5 +30,9 @@
     </ul>
   </div>
 {% endblock %}
+<div id="content">
+{% block body %}
 {% endblock %}
+</div>
+</body
 </html>
