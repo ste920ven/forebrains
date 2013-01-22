@@ -69,6 +69,7 @@ def startGame(game):
         players.remove(exception)
     print players
     for person in players:
+        tmp[person]["live"] = True
         if current == len(players) - 1:
             current = -1
         currentplus = current + 1
@@ -181,10 +182,11 @@ def getGameInfos():
         creator = str(getCreator(game))
         numplayers = len(getPlayers(game))
         tmp = games.find_one({"name":game})
+        started = gameStarted(game)
         if tmp["pass"]==False:
             view = "Public"
         else:
             view = "Private"
-        l.append([game,creator,view,numplayers])
+        l.append([game,creator,view,numplayers,started])
     return l
 

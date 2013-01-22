@@ -16,8 +16,9 @@ def home():
 @app.route("/game/<name>",methods=["POST","GET"])
 def game(name):
     if request.method=="GET":
+        print util.gameStarted(name)
         if session["user"] == util.getCreator(name):
-            return render_template("index.html",players=util.getPlayers(name),creator=True)
+            return render_template("index.html",players=util.getPlayers(name),creator=True,started=util.gameStarted(name))
         else:
             return render_template("index.html",players=util.getPlayers(name),ceator=False)
     else:
@@ -25,8 +26,8 @@ def game(name):
         if "tab" in pending:
             return handleTabs(pending)
         if request.form.has_key("startgame"):
-            util.startGame(session["game"])
-            return render_template("index.html",players=util.getPlayers(name),creator=True)
+            util.startGame(name)
+            return render_template("index.html",players=util.getPlayers(name),creator=True,started=True)
 
 @app.route("/login",methods=["POST","GET"])
 def login():
@@ -94,6 +95,7 @@ def creategame():
 @app.route("/joingame",methods=["POST","GET"])
 def joingame():
     if request.method == "GET":
+        games=util.getGameInfos()
         return render_template("joingame.html",games=util.getGameInfos())
     else:
         pending = request.form.keys()[0]
@@ -127,7 +129,8 @@ def updatelocation():
     ycor = request.args.get('ycor', '-1',type=float)
     util.setLoc(session["game"] ,session["user"], [xcor, ycor])
     if session["user"] == util.getCreator(session["game"]):
-        return render_template("index.html",players=util.getPlayers(session["game"]),creator=True)
+        print "here"
+        return render_template("index.html",players=util.getPlayers(session["game"]),creator=True,started=util.gameStarted(session["game"]))
     else:
         return render_template("index.html",player=util.getPlayers(session["game"]))
 
@@ -151,9 +154,6 @@ def getPursuer():
 
 @app.route("/getTargetLocation")
 def getTargetLocation():
-    print "here"
-    print session["user"]
-    print "here2"
     location = util.getLoc(session["game"], util.getTarget(session["game"], session["user"]));
     return json.dumps(location)
 

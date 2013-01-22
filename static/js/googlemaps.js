@@ -3,20 +3,21 @@ var watcher;
 var map, player, yourMarker, pursuer, target, pursuerMarker, targetMarker, game, targetLat, targetLng, pursuerLat, pursuerLng;
 
 $(document).ready(function(){
+    initializeMap();
     $.getJSON("/getCurrentUser", function (data) {
 	player = data;
-	$.getJSON("/getCurrentGame", function (data) {
-	    game = data;
-	    $.getJSON("/getTarget", function (data) {
-		target = data;
-		$.getJSON("/getPursuer", function (data) {
-		    pursuer = data;
-		    initializeMap();
-		});
-	    });
-	});
     });
-});    
+    $.getJSON("/getCurrentGame", function (data) {
+	game = data;
+    });
+    $.getJSON("/getTarget", function (data) {
+	target = data;
+    });
+    $.getJSON("/getPursuer", function (data) {
+	pursuer = data;
+    });
+});
+	    
 
 function initializeMap() {
     getLocation(makeMap);
@@ -63,11 +64,10 @@ function makeMap(position)
     var yourMarker = new google.maps.Marker({
 	position: myLatlng,
 	map: map,
-	title:"YOU : " + player
+	title:"YOU"
 	    });
     setInterval(updateYourMarker,500);
     if (gamestarted) {
-	console.log("here1");
     $.getJSON("/getTargetLocation", function (data) {
 	targetLat = data[0];
 	targetLng = data[1];
@@ -79,7 +79,6 @@ function makeMap(position)
 	});
     });};
     if (gamestarted){
-	console.log("here2");
     $.getJSON("/getPursuerLocation", function (data) {
 	pursuerLat = data[0];
 	pursuerLng = data[1];
