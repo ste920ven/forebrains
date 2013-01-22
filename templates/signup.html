@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html>
-<header>
-<title> Create Account </title>
-<link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css">
-<!-- <link href='http://fonts.googleapis.com/css?family=Kite+One' rel='stylesheet' type='text/css'> -->
-</header>
-<body>
+{% extends "base.html" %}
+{% block title %}Create Account{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block tabs %}{{super()}}{% endblock %}
+{% block body %}
 <center>
 <h1> Create your new Assassin Account </h1>
 <form action="" method="POST">
@@ -40,5 +39,4 @@ Passwords do not match.
 {% if nopassword %}
 Please enter a password.
 {% endif %}
-</body>
-</html>
+{% endblock %}

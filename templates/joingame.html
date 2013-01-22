@@ -1,22 +1,33 @@
 {% extends "base.html" %}
+{% block title %}Login{% endblock %}
 {% block head %}
 {{ super() }}
-{% block title %}Login{% endblock %}
 {% endblock %}
-
-{% block body %}
-<body>
 {% block tabs %}{{super()}}{% endblock %}
+{% block body %}
   <div id="input">
-    <form action="" method="POST">
-      <select name="Gamename">
+    <table class="gamesnav">
+      <tr>
+	<th>Game</th>
+	<th>Creator</th>	
+	<th>Public/Private</th>
+	<th>Number of Players</th>
+      </tr>
+     
 	{% for game in games %}
-	<option value = {{game}}>{{game}}</option>
+	<form action="" method="POST">
+	<tr class="awaitinggame">
+	  <td class="gamename">{{game[0]}}</td>
+	  <td class="gameauthor">{{game[1]}}</td>
+	  <td class="gametype">{{game[2]}}</td>
+	  <td class="gamemembers">{{game[3]}}</td>
+	  <td><input type="password" name="Password" class="" placeholder="Type your password"></td>
+	  <td><input type="submit" name="submitjoin" value="Join" class=""><br><br></td>
+	</tr>
+	<input type="hidden" name="Gamename" value={{game[0]}}>
+	</form>
 	{% endfor %}
-      </select>
-      <input type="password" name="Password" class="" placeholder="Type your password">
-      <input type="submit" name="submitjoin" value="Join" class=""><br><br>
-    </form>
+    </table>
+    
   </div>
-</body>
 {% endblock %}

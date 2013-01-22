@@ -80,6 +80,10 @@ def getTarget(game,player):
     tmp = games.find_one({"name":game})
     return tmp[player]["target"]
 
+def getLoc(game, player):
+    tmp = games.find_one({"name":game})
+    return tmp[player]["loc"]
+
 def getPursuer(game,player):
     tmp = games.find_one({"name":game})
     return tmp[player]["target"]
@@ -162,4 +166,16 @@ def getCreator(game):
     tmp = games.find_one({"name":game})
     return tmp["creator"]
 
-    
+def getGameInfos():
+    l = []
+    for game in getGames():
+        creator = str(getCreator(game))
+        numplayers = len(getPlayers(game))
+        tmp = games.find_one({"name":game})
+        if tmp["pass"]==False:
+            view = "Public"
+        else:
+            view = "Private"
+        l.append([game,creator,view,numplayers])
+    return l
+
