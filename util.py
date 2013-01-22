@@ -67,12 +67,13 @@ def startGame(game):
     for person in players:
         if person in exceptions:
             players.remove(person)
+        else:
             if current == len(players):
                 current = -1
-                tmp[person]["target"] = players[current+1]
-                tmp[players[current+1]]["pursuer"] = person
-                current = current + 1
-                games.update({"name":game},tmp)
+            currentplus = current + 1
+            tmp[players[current+1]]["pursuer"] = person
+            current = current + 1
+            games.update({"name":game},tmp)
     return True
        
 def getTarget(game,player):

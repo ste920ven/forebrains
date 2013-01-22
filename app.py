@@ -89,7 +89,7 @@ def creategame():
             password = str(request.form["pass1"])
             if not util.createGame(session["user"],password,name):
                 return render_template("creategame.html",taken=True)
-            return redirect(url_for("index",name=name))
+            return redirect(url_for("game",name=name))
 
 @app.route("/joingame",methods=["POST","GET"])
 def joingame():
