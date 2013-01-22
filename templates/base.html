@@ -1,8 +1,8 @@
 <!doctype html>
 <html>
 <head>
-  {% block head %}
   <title>{% block title %}Title{% endblock %}</title>
+  {% block head %}
   <link rel="shortcut icon" href="{{url_for("static", filename="favicon.ico")}}">
   <style type="text/css">@import "{{url_for("static", filename="css/main.css")}}";</style>
   <script src="/static/js/jquery.js"></script>
