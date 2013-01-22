@@ -4,7 +4,9 @@
 		   font-size:13;
 		  }
 
-body              {background:url('../wood_1.png');
+body              {
+                  background:url('../wood_1.png');
+		  width:75%;
 		  }
 
 .button           {border-style:solid;
@@ -15,8 +17,7 @@ body              {background:url('../wood_1.png');
 
 ul#tabnav         { /* general settings */
                    text-align: left; /* set to left, right or center */
-		   margin: 1em 0; /* set margins as desired */
-		   border-bottom: 2px solid black; /* set border COLOR as desired */
+		   margin: 0 0; /* set margins as desired */
 		   list-style-type: none;
 		   padding: 3px 10px 3px 10px; /* THIRD number must change with respect to padding-top (X) below */
                    }
@@ -65,7 +66,9 @@ form               {
 
 div#content        {
                    background-image:url('../bedge_grunge.png');
-		   }
+		   border-style:none;
+		   border-radius:8px;
+                   }
 
 #input             {
                    margin:5px;
