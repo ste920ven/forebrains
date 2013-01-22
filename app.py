@@ -126,16 +126,38 @@ def handleTabs(pressed):
 
 @app.route("/updatelocation")
 def updatelocation():
-    game = request.args.get('game', '')
-    player = request.args.get('player', '')
     xcor = request.args.get('xcor', '-1')
     ycor = request.args.get('ycor', '-1')
-    util.setLoc(game,player, [xcor, ycor])
-    return True
+    util.setLoc(session["game"] ,session["user"], [xcor, ycor])
+    return
 
 @app.route("/getCurrentUser")
 def getCurrentUser():
-    return session["user"]
+    return json.dumps(session["user"])
+
+@app.route("/getCurrentGame")
+def getCurrentGame():
+    return json.dumps(session["game"])
+
+@app.route("/getTarget")
+def getTarget():
+    target = util.getTarget(session["game"], session["user"])
+    return json.dumps(target)
+
+@app.route("/getPursuer")
+def getPursuer():
+    pursuer = util.getPursuer(session["game"], session["user"])
+    return json.dumps(pursuer)
+
+@app.route("/getTargetLocation")
+def getTargetLocation():
+    location = util.getLoc(session["game"], util.getTarget(session["game"], session["user"]));
+    return json.dumps(location)
+
+@app.route("/getPursuerLocation")
+def getPursuerLoaction():
+    location = util.getLoc(session["game"], util.getPursuer(session["game"], session["user"]));
+    return json.dumps(location)
 
 if __name__=="__main__":
     app.debug=True
