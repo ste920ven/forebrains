@@ -74,17 +74,36 @@ div#content        {
                    }
 
 #input             {
-                   margin:5px;
+                   margin:0px;
 		   width:100%
                    }
 
 .awaitinggame      {
-                   border-style:solid;
-		   border-width:2px;
-		   border-color:red;
-		   padding:5px;
+		   padding:4px;
                    }
 
 .awaitinggame gamename{
                    width:500px
                    }
+
+table, th, td      {
+                   border-collapse:collapse;
+		   border:1px solid;
+		   text-align:center;
+		   vertical-align:middle;
+		   }
+
+td                 {
+                   padding: 4px 15px;
+                   }
+
+[name='submitjoin']{
+                   color:#ffffff;
+		   padding:3px 5px;
+                   background:#333333;
+		   box-shadow:0px 2px 4px black;
+                   }
+
+[name='Password'] {
+                  padding:4px;
+                  }
