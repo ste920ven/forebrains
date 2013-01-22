@@ -19,7 +19,7 @@ ul#tabnav         { /* general settings */
                    text-align: left; /* set to left, right or center */
 		   margin: 0 0; /* set margins as desired */
 		   list-style-type: none;
-		   padding: 3px 10px 3px 10px; /* THIRD number must change with respect to padding-top (X) below */
+		   padding: 3px 10px 0px 10px; /* THIRD number must change with respect to padding-top (X) below */
                    }
 
 ul#tabnav li       { /* do not change */
@@ -43,7 +43,10 @@ body#tab1 li.tab1 button, body#tab2 li.tab2 button, body#tab3 li.tab3 button, bo
 
 ul#tabnav li button { /* settings for all tab links */
                    padding: 5px 8px; /* set padding (tab size) as desired; FIRST number must change with respect to padding-top (X) above */
-		   border: 1px solid black; /* set border COLOR as desired; usually matches border color specified in #tabnav */
+		   border-top: 1px solid black; /* set border COLOR as desired; usually matches border color specified in #tabnav */
+		   border-right:1px solid black;
+		   border-left:1px solid black;
+		   border-bottom:0px;
 		   border-top-right-radius:4px;
 		   border-top-left-radius:4px;
 		   background-image:url('../bedge_grunge.png');
