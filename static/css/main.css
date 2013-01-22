@@ -114,3 +114,14 @@ td                 {
 [name='Password'] {
                   padding:4px;
                   }
+
+div#field         {
+                  width:75%;
+		  height:75%;
+		  }
+
+div#background         {
+                  background-image:url('../bedge_grunge.png');
+		  border-style:none;
+		  border-radius:8px;
+		  }

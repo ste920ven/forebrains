@@ -53,7 +53,7 @@ function makeMap(position)
 	zoom: 14,
 	mapTypeId: google.maps.MapTypeId.ROADMAP
 	};
-    map = new google.maps.Map(document.getElementById("field"), mapOptions);
+    map = new google.maps.Map(document.getElementById('background').getElementsByTagName('div')[0], mapOptions);
     watcher = navigator.geolocation.watchPosition(updateYourMarker,
 						  updateYourMarker,
 						  {'enableHighAccuracy':true,
