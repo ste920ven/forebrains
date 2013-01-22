@@ -83,6 +83,8 @@ def creategame():
         pending = request.form.keys()[0]
         if "tab" in pending:
             return handleTabs(pending)
+        if 'user' not in session:
+            return redirect(url_for("login"))
         if request.form.has_key("back"):
             return redirect(url_for("home"))
         if request.form.has_key("submitgame"):
@@ -101,6 +103,8 @@ def joingame():
         pending = request.form.keys()[0]
         if "tab" in pending:
             return handleTabs(pending)
+        if 'user' not in session:
+            return redirect(url_for("login"))
         if request.form.has_key("submitjoin"):
             name = str(request.form["Gamename"])
             password = str(request.form["Password"])
