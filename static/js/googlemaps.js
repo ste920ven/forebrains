@@ -1,13 +1,25 @@
 var lat,lng;
 var watcher;
-var map,yourMarker, pursuerMarker, targetMarker;
+var map, player, yourMarker, pursuer, target, pursuerMarker, targetMarker, game, targetLat, targetLng, pursuerLat, pursuerLng;
 
 $(document).ready(function(){
-    initializeMap();
-});
+    $.getJSON("/getCurrentUser", function (data) {
+	player = data;
+	$.getJSON("/getCurrentGame", function (data) {
+	    game = data;
+	    $.getJSON("/getTarget", function (data) {
+		target = data;
+		$.getJSON("/getPursuer", function (data) {
+		    pursuer = data;
+		    initializeMap();
+		});
+	    });
+	});
+    });
+});    
 
 function initializeMap() {
-    getLocation(makeMap);  
+    getLocation(makeMap);
 }
 
 function getLocation(e)
@@ -29,7 +41,7 @@ function makeMap(position)
     lng = position.coords.longitude;
     console.log(lat);
     console.log(lng);
-    //$.getJSON("/updatelocation",{player:player, name:name,xcor:lat,ycor:lng},function(){});
+    $.getJSON("/updatelocation",{xcor:lat,ycor:lng},function(){});
     var mapOptions = {
 	center: new google.maps.LatLng(lat,lng),
 	zoom: 14,
@@ -46,8 +58,30 @@ function makeMap(position)
     var yourMarker = new google.maps.Marker({
 	position: myLatlng,
 	map: map,
-	title:"YOU"
+	title:"YOU : " + player
     });
+    setInterval(updateYourMarker,500);
+    $.getJSON("/getTargetLocation", function (data) {
+	targetLat = data[0];
+	targetLng = data[1];
+	var targetLatlng = new google.maps.LatLng(targetLat,targetLng);
+	var targetMarker = new google.maps.Marker({
+	    position: targetLatlng,
+	    map: map,
+	    title: "TARGET"
+	});
+    });
+    $.getJSON("/getPursuerLocation", function (data) {
+	pursuerLat = data[0];
+	pursuerLng = data[1];
+	var pursuerLatlng = new google.maps.LatLng(pursuerLat,pursuerLng);
+	var pursuerMarker = new google.maps.Marker({
+	    position: pursuerLatlng,
+	    map: map,
+	    title: "PURSUER"
+	});
+    });
+    
 }
 
 function updateYourMarker(e){
@@ -55,6 +89,9 @@ function updateYourMarker(e){
 	lat = p.coords.latitude;
 	lng = p.coords.longitude;
 	var yourMarker;
+	try {
 	yourMarker.setPosition(new google.maps.LatLng(lat, lng));
+	}
+	catch (err) {}
     });
 }
