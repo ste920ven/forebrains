@@ -9,11 +9,10 @@ html              {
 		  }
 
 body              {
-                  background:url('../extra_clean_paper.png');
 		  width:85%;
 		  height:80%;
-		  border-radius:15px;
-		  }
+		  margin:0px 0px 0px 1.5em;
+                  }
 
 /* begin css tabs. credit Joshua Kaufman of unraveled.com */
 
@@ -22,7 +21,6 @@ ul#tabnav         { /* general settings */
 		   margin: 0 0; /* set margins as desired */
 		   list-style-type: none;
 		   padding: 15px 10px 0px 10px; /* THIRD number must change with respect to padding-top (X) below */
-		   background-image:url('../wood_1.png');
                    }
 
 ul#tabnav li       { /* do not change */
@@ -53,22 +51,22 @@ ul#tabnav li button { /* settings for all tab links */
 		   border-top-right-radius:4px;
 		   border-top-left-radius:4px;
 		   background-image:url('../bedge_grunge.png');
-		   color: black; /* set unselected tab color as desired */
+		   color:#7a5200; /* set unselected tab color as desired */
 		   margin-right: 0px; /* set additional spacing between tabs as desired */
-		   text-decoration: none;
 		   border-bottom: none;
 		   font-size: 20px;
+		   text-shadow: -.08em -.08em white, .08em .08em black;
                    }
 
 ul#tabnav form button:hover  { /* settings for hover effect */
-                    background: #a74d4d; /* set desired hover color */
+                   text-shadow: .08em .08em white, -.08em -.08em black;
                    }
 
 /* end css tabs. credit Joshua Kaufman of unraveled.com */
 
 form               {
                    display: inline;
-		   margin:10px;
+		   margin:0px;
                    }
 
 /*.content        {
@@ -76,11 +74,6 @@ form               {
 		   border-style:none;
 		   border-radius:8px;
                    }*/
-
-#input             {
-                   margin:0px;
-		   width:100%
-                   }
 
 .awaitinggame      {
 		   padding:4px;
@@ -115,10 +108,25 @@ td                 {
 		   box-shadow:0px 2px 4px black;
                    }
 
-[name='Password'], [name='Username'] {
-                  padding:4px;
-                  }
+[name='Password']  {
+                   padding: 4px;
+                   }
 
-.circle           {
-                  list-style-type:circle;
-                  }
+[name='Username']  {
+                   padding:4px;
+		   margin:0px 4px 0px 15px;
+                   }
+
+.circle            {
+                   list-style-type:circle;
+                   }
+
+h2                 {
+                   text-shadow:0 0 0.05em black;
+		   }
+
+.content           {
+                   background-image:url('../extra_clean_paper.png');
+                   border-radius:8px;
+		   padding:10px 10px 20px;
+		   }
