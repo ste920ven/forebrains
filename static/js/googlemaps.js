@@ -113,7 +113,7 @@ function updateYourMarker(e){
 	    alive = data;
 	});
     }
-    $.getJson("/started",function (data) {
+    $.getJSON("/started",function (data) {
 	if (data == true && startRefresh == 1)
 	startRefresh = 2;
     });
