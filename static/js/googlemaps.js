@@ -125,23 +125,19 @@ function updateYourMarker(e){
     $("checkin").click(updateMarkers);
     }
     else {
-/*	if (gamestarted) {
+	if (gamestarted) {
 	$("checkin").disabled = true;
 	$("kill").disabled = true;
 	$.getJSON("/alllocs", function (data) {
-	    console.log(data);
 	    for (var i = 0; i < data.length; i++) {
-		markers[i] = new google.maps.Marker({
+		allMarkers[i] = new google.maps.Marker({
 		    position: new google.maps.LatLng(data[i][1][0],data[i][1][1]),
-		    map: map;
-		    title: data[i][0];
+		    map: map,
+		    title: data[i][0],
 		});
 	    }
 	});
-	}
-   
-*/
-	console.log("not alive");
+	};
     }
 }
 
