@@ -123,6 +123,7 @@ ul.circle          {
 h2                 {
                    text-shadow:0 0 0.05em black;
 		   }
+
 .content           {
                    background-image:url('../extra_clean_paper.png');
                    border-radius:8px;
@@ -131,7 +132,7 @@ h2                 {
 		   width:85%;
 		   }
 
-.content#thing     {
+.content#table     {
                    min-width:975px;
                    }
 
