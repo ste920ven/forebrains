@@ -181,6 +181,11 @@ def alive():
 def started():
     return json.dumps(util.gameStarted(session["game"]))
 
+@app.route("/alllocs")
+def alllocs():
+    alllocs = util.getAllLocs(session["game"])
+    return json.dumps(alllocs)
+
 if __name__=="__main__":
     app.debug=True
     app.run('0.0.0.0')
