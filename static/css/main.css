@@ -116,7 +116,7 @@ td                 {
                    }
 
 ul.circle          {
-                   padding-left:40px;
+                   padding-left:60px;
                    list-style-type:disc;
                    }
 
@@ -154,15 +154,25 @@ h2                 {
                   border-radius:6px;
 		  padding:5px 10px;
                   font-size:20px;
-		  text-shadow:0.1em 0.1em 0.2em black;
-		  box-shadow: 0.1em 0.1em black;
+		  text-shadow:0.1em 0.1em 0.1em #4c4c4c;
+		  box-shadow: 0.1em 0.1em 0.2em black;
                   }
 
 .button#assassinate{
                   border-radius:6px;
 		  padding:5px 10px;
 		  font-size:20px;
-		  text-shadow: 0.1em 0.1em 0.2em black;
+		  text-shadow: 0.1em 0.1em 0.1em #4c4c4c;
 		  box-shadow: 0.1em 0.1em 0.2em black;
 		  margin-left:40px;
+		  }
+
+.button#start     {
+                  border-radius:6px;
+		  padding:5px 10px;
+		  font-size:20px;
+		  text-shadow: 0.1em 0.1em 0.1em #4c4c4c;
+		  box-shadow: 0.1em 0.1em 0.2em black;
+		  margin-left:40px;
+		  background-color:#52cc29;
 		  }
