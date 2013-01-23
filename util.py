@@ -158,7 +158,9 @@ def penalize(game,player):
     return True
 
 def setLive(game,player,status):
-    games.update({"name":game},{"$set":{player:{"live":status}}})
+    tmp = games.find_one({"name":game})[player]
+    tmp["live"] = status
+    games.update({"name":game},{"$set":{player:tmp}})
 
 def getRankings(game):
     rankings = []
