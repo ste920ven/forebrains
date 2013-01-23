@@ -108,16 +108,17 @@ function makeMap(position)
 
 
 function updateYourMarker(e){
+    $.getJSON("/started",function (data) {
+	if (data == true && startRefresh == 1)
+	startRefresh = 2;
+    });
     if (alive) {
 	$.getJSON("/alive", function (data) {
 	    alive = data;
 	});
     }
-    $.getJSON("/started",function (data) {
-	if (data == true && startRefresh == 1)
-	startRefresh = 2;
-    });
     if (startRefresh == 2) {
+	gamestarted = true;
 	updateMarkers(68);
 	startRefresh = 0;
     }
@@ -134,21 +135,10 @@ function updateYourMarker(e){
     }
     else {
 	if (gamestarted) {
-	$("checkin").disabled = true;
-	$("kill").disabled = true;
-	$.getJSON("/alllocs", function (data) {
-	    for (var i = 0; i < data.length; i++) {
-		allMarkers[i] = new google.maps.Marker({
-		    position: new google.maps.LatLng(data[i][1][0],data[i][1][1]),
-		    map: map,
-		    title: data[i][0],
-		});
-	    }
-	});
-	};
+	    $.getJSON("/dead",function(){});
+	}
     }
 }
-
 function updateMarkers(e){
   if (gamestarted) {
       $.getJSON("/getTargetLocation", function (data) {

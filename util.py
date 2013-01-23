@@ -179,7 +179,7 @@ def getAllLocs(game):
     invalids = ["creator","pass","name","_id","started"]
     for person in k:
         if person not in invalids:
-            locations.append([tmp[person],tmp[person]["loc"]])
+            locations.append(tmp[person]["loc"])
     return locations
 
 def getGames():
@@ -239,7 +239,8 @@ def tryKill(game,player):
     c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
     distance = R * c
     if distance < 0.05: 
-        gamesystem.kill(game,player,getTarget(game,player))
+        if not gamesystem.kill(game,player,getTarget(game,player)):
+            return False
     else:
         gamesystem.penalize(game,player)
     return True

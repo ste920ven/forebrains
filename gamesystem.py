@@ -8,7 +8,7 @@ def kill(game,pursuer,target):
   util.setTarget(game,str(target),"")
   util.setPursuer(game,str(target),"")
   if newTarget == pursuer:
-    end(game)
+    return False
   return True
   
 def checkIn(game,player,loc):
@@ -21,9 +21,7 @@ def score(game,player):
   return score
 
 def end(game):
-  winners = util.getRankings(game)
-  util.removeGame(game)
-  return winners
+  return True
   
 def penalize(game,player):
   util.penalize(game,player)
