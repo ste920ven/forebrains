@@ -11,7 +11,8 @@ html              {
 body              {
 		  width:85%;
 		  height:80%;
-		  }
+		  margin:0px 0px 0px 1.5em;
+                  }
 
 /* begin css tabs. credit Joshua Kaufman of unraveled.com */
 
@@ -20,7 +21,6 @@ ul#tabnav         { /* general settings */
 		   margin: 0 0; /* set margins as desired */
 		   list-style-type: none;
 		   padding: 15px 10px 0px 10px; /* THIRD number must change with respect to padding-top (X) below */
-		   background-image:url('../wood_1.png');
                    }
 
 ul#tabnav li       { /* do not change */
@@ -51,7 +51,7 @@ ul#tabnav li button { /* settings for all tab links */
 		   border-top-right-radius:4px;
 		   border-top-left-radius:4px;
 		   background-image:url('../bedge_grunge.png');
-		   color:#ebe0cc; /* set unselected tab color as desired */
+		   color:#7a5200; /* set unselected tab color as desired */
 		   margin-right: 0px; /* set additional spacing between tabs as desired */
 		   border-bottom: none;
 		   font-size: 20px;
