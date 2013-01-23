@@ -1,6 +1,6 @@
 var lat,lng;
 var watcher;
-var map, player, yourMarker, pursuer, target, pursuerMarker, targetMarker, game, targetLat, targetLng, pursuerLat, pursuerLng, gamestarted, allMarkers;
+var map, player, yourMarker, pursuer, target, pursuerMarker, targetMarker, game, targetLat, targetLng, pursuerLat, pursuerLng, gamestarted, allMarkers, alive;
 var startRefresh = 1;
 $(document).ready(function(){
     initializeMap();
@@ -118,7 +118,7 @@ function updateYourMarker(e){
 	startRefresh = 2;
     });
     if (startRefresh == 2) {
-	updateMarkers();
+	updateMarkers(68);
 	startRefresh = 0;
     }
     if (alive) {
@@ -149,7 +149,7 @@ function updateYourMarker(e){
     }
 }
 
-function updateMarkers(){
+function updateMarkers(e){
   if (gamestarted) {
       $.getJSON("/getTargetLocation", function (data) {
 	  targetLat = data[0];
