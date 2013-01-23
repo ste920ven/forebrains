@@ -26,6 +26,11 @@ def game(name):
         if request.form.has_key("startgame"):
             util.startGame(name)
             return render_template("index.html",players=util.getPlayers(name),creator=True,started=True)
+        if request.form.has_key("checkin"):
+            if session["user"] == util.getCreator(name):
+                return render_template("index.html",players=util.getPlayers(name),creator=True,started=util.gameStarted(name))
+            else:
+                return render_template("index.html",players=util.getPlayers(name),ceator=False)
 
 @app.route("/login",methods=["POST","GET"])
 def login():
