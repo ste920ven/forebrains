@@ -35,13 +35,13 @@
       </form>
       {% else %}
       <form action="" method="POST">
-	<button name="startgame">Start Game</button>
+	<button class="button" id="start" name="startgame">Start Game</button>
       </form>
       {% endif %}
       {% endif %}
       <br><br>
       <strong>Players:</strong>
-      <ul>
+      <ul class="circle">
 	{% for player in players %}
 	<li> {{player}} </li>
 	{% endfor %}
