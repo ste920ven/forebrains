@@ -81,6 +81,8 @@ def signup():
 @app.route("/creategame",methods=["POST","GET"])
 def creategame():
     if request.method == "GET":
+        if 'user' not in session:
+            return redirect(url_for("home"))
         return render_template("creategame.html")
     else:
         pending = request.form.keys()[0]
@@ -98,6 +100,8 @@ def creategame():
 @app.route("/joingame",methods=["POST","GET"])
 def joingame():
     if request.method == "GET":
+        if 'user' not in session:
+            return redirect(url_for("home"))
         return render_template("joingame.html",games=util.getGameInfos(session["user"]))
     else:
         pending = request.form.keys()[0]
