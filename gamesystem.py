@@ -1,8 +1,9 @@
 import util, random
 
 def kill(game,pursuer,target):
-  newTarget = getTarget(game,target)
+  newTarget = util.getTarget(game,target)
   util.changeTarget(game,pursuer,newTarget)
+  util.addKill(game,pursuer)
   util.setLive(game,target,False)
   util.setTarget(game,target,"")
   util.setPursuer(game,target,"")

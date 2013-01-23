@@ -4,6 +4,8 @@ import sys
 import time
 import base64
 import random
+import gamesystem
+import math
 from pymongo import Connection
 
 Conn = Connection('ds041367.mongolab.com',41367)
@@ -103,6 +105,12 @@ def isAlive(game,player):
     tmp = games.find_one({"name":game})
     return tmp[player]["live"]
 
+def addKill(game,player):
+    tmp = games.find_one({"name":game})[player]
+    tmp["kills"] = tmp["kills"] + 1
+    games.update({"name":game},{"$set":{player:tmp}})
+    return True
+
 def getKills(game,player):
     tmp = games.find_one({"name":game})
     return tmp[player]["kills"]
@@ -123,14 +131,14 @@ def setLoc(game,player,loc):
 
 def setTarget(game,player,newTarget):
     tmp = games.find_one({"name":game})[player]
-    tmp[player]["target"] = newTarget
-    games.find_one({"name":game},{"$set":{player:tmp[player]}})
+    tmp[player]["target"] = str(newTarget)
+    games.find_one({"name":game},{"$set":{player:tmp}})
     return True
 
-def setPursuer():
+def setPursuer(game,player,newPursuer):
     tmp = games.find_one({"name":game})[player]
-    tmp[player]["pursuer"] = newTarget
-    games.find_one({"name":game},{"$set":{player:tmp[player]}})
+    tmp[player]["pursuer"] = newPursuer
+    games.find_one({"name":game},{"$set":{player:tmp}})
     return True
     
 def changeTarget(game,pursuer,target):
@@ -144,9 +152,9 @@ def changeTarget(game,pursuer,target):
 
 def penalize(game,player):
     now = time.time()
-    games.update({"name":game},{"$set":{"penalty":now}})
-    pser = games.find_one({"name":game})[player]["pursuer"]
-    games.update({"name":game},{"$set":{pser:{"bonus":True}}})
+    tmp = games.find_one({"name":game})[player]
+    tmp["penalty"] = now
+    games.update({"name":game},{"$set":{player:tmp}})
     return True
 
 def setLive(game,player,status):
@@ -213,3 +221,23 @@ def getGameInfos(user):
         l.append([game,creator,view,numplayers,started,ingame])
     return l
 
+def tryKill(game,player):
+    targetLoc = getLoc(game,getTarget(game,player))
+    playerLoc = getLoc(game,player)
+    lat = playerLoc[0]
+    targetLat = targetLoc[0]
+    lng = playerLoc[1]
+    targetLng = targetLoc[1]
+    R = 6371
+    dLat = math.radians(lat - targetLat)
+    dLon = math.radians(lng - targetLng)
+    dLat1 = math.radians(targetLat)
+    dLat2 = math.radians(lat)
+    a = math.sin(dLat/2) * math.sin(dLat/2) + math.cos(dLat1) * math.cos(dLat1) * math.sin(dLon/2) * math.sin(dLon/2)
+    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
+    distance = R * c
+    if distance < 0.05: 
+        gamesystem.kill(game,player,getTarget(game,player))
+    else:
+        gamesystem.penalize(game,player)
+    return True
