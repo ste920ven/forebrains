@@ -176,10 +176,13 @@ def started():
 
 @app.route("/kill")
 def kill():
-    
+    gamesystem.kill(session["game"],session["user"],util.getTarget(session["game"],session["user"]))
+    return json.dumps()
 
 @app.route("/penalize")
 def penalize(): 
+    gamesystem.kill(session["game"],session["user"])
+    return json.dumps()
 
 if __name__=="__main__":
     app.debug=True

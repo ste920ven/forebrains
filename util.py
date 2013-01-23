@@ -125,8 +125,12 @@ def setLoc(game,player,loc):
     return True
     
 def setTarget(game,pursuer,target):
-    games.update({"name":game},{"$set":{pursuer:{"target":target}}})
-    games.update({"name":game},{"$set":{target:{"pursuer":pursuer}}})
+    tmpone = games.find_one({"name":game})[pursuer]
+    tmptwo = games.find_one({"name":game})[target]
+    tmpone["target"] = target
+    tmptwo["pursuer"] = pursuer
+    games.update({"name":game},{"$set":{pursuer:tmpone}})
+    games.update({"name":game},{"$set":{target:tmptwo}})
     return True
 
 def penalize(game,player):

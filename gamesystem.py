@@ -1,7 +1,7 @@
 import util, random
 
 def kill(game,pursuer,target):
-  util.newTarget = getTarget(game,player)
+  newTarget = getTarget(game,target)
   util.setTarget(game,pursuer,newTarget)
   util.setLive(game,target,False)
   return True
