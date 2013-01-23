@@ -109,8 +109,9 @@ function makeMap(position)
 
 function updateYourMarker(e){
     $.getJSON("/started",function (data) {
-	if (data == true && startRefresh == 1)
+	if (data == true && startRefresh == 1) {
 	startRefresh = 2;
+	}
     });
     if (alive) {
 	$.getJSON("/pcheckin",function(data) {
@@ -118,7 +119,7 @@ function updateYourMarker(e){
 		notPursuer = true;
 		updateMarkers(68);
 	    }
-	}
+	});
 	$.getJSON("/alive", function (data) {
 	    alive = data;
 	});
@@ -145,6 +146,7 @@ function updateYourMarker(e){
 	}
     }
 }
+
 function updateMarkers(e){
   if (gamestarted) {
       if (!notTarget) {
