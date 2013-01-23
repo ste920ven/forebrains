@@ -115,8 +115,9 @@ td                 {
 		   margin:0px 4px 0px 15px;
                    }
 
-ul.circle            {
-                   list-style-type:circle;
+ul.circle          {
+                   padding-left:40px;
+                   list-style-type:disc;
                    }
 
 h2                 {
