@@ -8,8 +8,8 @@ Jack Stevenson
 <h1>ASSASSIN</h1><h2>--CS edition</h2>
 <h2>Roles:</h2>
 <ul>
-  <li>Biggs - database</li>
-  <li>Dina - google maps api + display + javascript?</li>
-  <li>Steven -python stuff</li>
-  <li>Jack - f-f-f-f-f-f-fashion (css, design) + javascript?</li>
+  <li>Biggs - Database: MongoDB</li>
+  <li>Dina - game display: Google Maps API and Javascript</li>
+  <li>Steven -Server-side python</li>
+  <li>Jack - CSS, HTML</li>
 </ul>

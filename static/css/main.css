@@ -130,9 +130,15 @@ h2                 {
 		   position:absolute;
 		   width:85%;
 		   }
+
+.content#thing     {
+                   min-width:975px;
+                   }
+
 .content *         {
                    position:relative;
                    }
+
 .wrapper           {
                    background-image:url('../extra_clean_paper.png');
 		   width:85%;
