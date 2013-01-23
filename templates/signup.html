@@ -6,25 +6,26 @@
 {% block tabs %}{{super()}}{% endblock %}
 {% block body %}
 <center>
-<h1> Create your new Assassin Account </h1>
+<br><h2>Welcome aboard, agent.</h2><br>
 <form action="" method="POST">
 <table>
   <tr>
-		<td align = "right">Choose a username:</td>
+		<td align="right">Choose a username:</td>
 		<td><input type="text" name="user" size="50"></td>
 	</tr>
 	<tr>
-		<td align = "right">Choose a password:</td>
+		<td align="right">Choose a password:</td>
 		<td><input type="password" name="pass1" size="50"></td>
 	</tr>
 	<tr>
-		<td align = "right">Re-Enter password:</td>
+		<td align="right">Re-Enter password:</td>
 		<td><input type="password" name="pass2" size="50"></td>
 	</tr>
 </table>
-
-<input type="submit" name="submit" value="Submit">
-<input type="submit" name="back" value="Back"
+<br>
+<input class="button" type="submit" name="submit" value="Submit">
+<input class="button" type="submit" name="back" value="Back"><br>
+<br>
 </center>
 </form>
 {% if taken %}
