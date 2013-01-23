@@ -6,6 +6,7 @@
 {% block tabs %}{{super()}}{% endblock %}
 {% block body %}
 <div class="content">
+  <center><h2>Join an Existing Mission</h2></center><br>
     <table class="gamesnav">
       <tr>
 	<th>Game</th>
@@ -24,12 +25,12 @@
 	  <td><input type="password" name="Password" class="" placeholder="Type your password"></td>
 	  {% if game[4] == True %}
 	  {% if game[5] == False %}
-	  <td><input type="submit" name="submitjoindis" value="Join" class="" disabled><br><br></td>
+	  <td><input class="button" type="submit" name="submitjoindis" value="Join" class="" disabled><br><br></td>
 	  {% else %}
-	  <td><input type="submit" name="submitjoin" value="Join" class=""><br><br></td>
+	  <td><input class="button" type="submit" name="submitjoin" value="Join" class=""><br><br></td>
 	  {% endif %}
 	  {% else %}
-	  <td><input type="submit" name="submitjoin" value="Join" class=""><br><br></td>
+	  <td><input class="button" type="submit" name="submitjoin" value="Join" class=""><br><br></td>
 	  {% endif %}
 	</tr>
 	<input type="hidden" name="Gamename" value={{game[0]}}>
