@@ -127,6 +127,8 @@ h2                 {
                    background-image:url('../extra_clean_paper.png');
                    border-radius:8px;
 		   padding:10px 10px 20px;
+		   position:absolute;
+		   width:85%;
 		   }
 .content *         {
                    position:relative;
