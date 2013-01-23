@@ -12,7 +12,6 @@ def home():
         pending = request.form.keys()[0]
         if "tab" in pending:
             return handleTabs(pending)
-
 @app.route("/game/<name>",methods=["POST","GET"])
 def game(name):
     if request.method=="GET":

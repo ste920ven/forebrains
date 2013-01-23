@@ -1,22 +1,30 @@
 var lat,lng;
 var watcher;
-var map, player, yourMarker, pursuer, target, pursuerMarker, targetMarker, game, targetLat, targetLng, pursuerLat, pursuerLng;
+var map, player, yourMarker, pursuer, target, pursuerMarker, targetMarker, game, targetLat, targetLng, pursuerLat, pursuerLng, gamestarted;
 
 $(document).ready(function(){
     initializeMap();
+    $.ajaxSetup({
+	async: false
+    });
+    $.getJSON("/started",function(data){
+	gamestarted = data;
+    });  
     $.getJSON("/getCurrentUser", function (data) {
 	player = data;
     });
     $.getJSON("/getCurrentGame", function (data) {
 	game = data;
     });
+    console.log(gamestarted);
+    if(gamestarted) {
     $.getJSON("/getTarget", function (data) {
 	target = data;
     });
     $.getJSON("/getPursuer", function (data) {
 	pursuer = data;
     });
-});
+    }});
 	    
 
 function initializeMap() {
@@ -41,12 +49,6 @@ function makeMap(position)
     lng = position.coords.longitude;
     console.log(lat);
     console.log(lng);
-    $.ajaxSetup({
-	async: false
-    });
-    $.getJSON("/started",function(data){
-	gamestarted = data;
-    });   
     $.getJSON("/updatelocation",{xcor:lat,ycor:lng},function(){});
     var mapOptions = {
 	center: new google.maps.LatLng(lat,lng),

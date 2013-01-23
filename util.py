@@ -33,8 +33,12 @@ def createGame(creator,password,name):
 
 def addPlayer(game,user):
     tmp = games.find_one({"name":game})
+    k = tmp.keys()
+    if user in k:
+        return False
     tmp[user] = {"loc":[0,0], "pursuer" : "", "target" : "", "kills" : 0, "live" : False, "penalty" : 0, "bonus" : False}
     games.update({"name" : game},tmp)
+    return True
 
 def checkUserPass(user,password):
     encpass = base64.b64encode(password)
@@ -86,13 +90,13 @@ def gameStarted(game):
        
 def getTarget(game,player):
     tmp = games.find_one({"name":game})
+    print player
+    print game
+    print tmp
     return tmp[player]["target"]
 
 def getLoc(game, player):
     tmp = games.find_one({"name":game})
-    print "here1"
-    print player
-    print game
     return tmp[player]["loc"]
 
 def getPursuer(game,player):
