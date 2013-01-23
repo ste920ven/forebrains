@@ -32,7 +32,8 @@ def game(name):
             else:
                 return render_template("index.html",players=util.getPlayers(name),ceator=False)
         if request.form.has_key("kill"):
-            util.tryKill(name,session["user"])
+            if not util.tryKill(name,session["user"]):
+                return redirect(url_for("home"))
             if session["user"] == util.getCreator(name):
                 return render_template("index.html",players=util.getPlayers(name),creator=True,started=util.gameStarted(name))
             else:
@@ -185,6 +186,10 @@ def started():
 def alllocs():
     alllocs = util.getAllLocs(session["game"])
     return json.dumps(alllocs)
+
+@app.route("/dead")
+def dead():
+    return redirect(url_for("home"))
 
 if __name__=="__main__":
     app.debug=True
