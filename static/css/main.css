@@ -122,13 +122,22 @@ td                 {
 h2                 {
                    text-shadow:0 0 0.05em black;
 		   }
-
+/*
 .content           {
                    background-image:url('../extra_clean_paper.png');
                    border-radius:8px;
 		   padding:10px 10px 20px;
 		   }
-
+*/
+.content *         {
+                   position:relative;
+                   }
+.wrapper           {
+                   background-image:url('../extra_clean_paper.png');
+		   width:75%%;
+		   height:100%;
+		   position:absolute;
+                   }
 .button           {
                   border-radius:2px;
 		  padding:3px;
