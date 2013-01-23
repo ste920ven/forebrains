@@ -1,9 +1,12 @@
 import util, random
 
 def kill(game,pursuer,target):
-  newTarget = getTarget(game,target)
-  util.setTarget(game,pursuer,newTarget)
+  newTarget = util.getTarget(game,target)
+  util.changeTarget(game,pursuer,newTarget)
+  util.addKill(game,pursuer)
   util.setLive(game,target,False)
+  util.setTarget(game,target,"")
+  util.setPursuer(game,target,"")
   return True
   
 def checkIn(game,player,loc):
