@@ -1,6 +1,6 @@
 *                 {margin:0;
                    padding:0;
-                   font-family:"Georgia","Comic Sans MS",serif;
+                   font-family:"Courier New","Lucida Console",courier,monospace;
 		   font-size:13;
 		  }
 
@@ -113,8 +113,3 @@ td                 {
 [name='Password'] {
                   padding:4px;
                   }
-
-div#field         {
-                  width:75%;
-		  height:75%;
-		  }
