@@ -12,11 +12,9 @@ def home():
         pending = request.form.keys()[0]
         if "tab" in pending:
             return handleTabs(pending)
-
 @app.route("/game/<name>",methods=["POST","GET"])
 def game(name):
     if request.method=="GET":
-        print util.gameStarted(name)
         if session["user"] == util.getCreator(name):
             return render_template("index.html",players=util.getPlayers(name),creator=True,started=util.gameStarted(name))
         else:
@@ -83,8 +81,6 @@ def creategame():
         pending = request.form.keys()[0]
         if "tab" in pending:
             return handleTabs(pending)
-        if 'user' not in session:
-            return redirect(url_for("login"))
         if request.form.has_key("back"):
             return redirect(url_for("home"))
         if request.form.has_key("submitgame"):
@@ -102,8 +98,6 @@ def joingame():
         pending = request.form.keys()[0]
         if "tab" in pending:
             return handleTabs(pending)
-        if 'user' not in session:
-            return redirect(url_for("login"))
         if request.form.has_key("submitjoin"):
             name = str(request.form["Gamename"])
             password = str(request.form["Password"])
@@ -132,7 +126,6 @@ def updatelocation():
     ycor = request.args.get('ycor', '-1',type=float)
     util.setLoc(session["game"] ,session["user"], [xcor, ycor])
     if session["user"] == util.getCreator(session["game"]):
-        print "here"
         return render_template("index.html",players=util.getPlayers(session["game"]),creator=True,started=util.gameStarted(session["game"]))
     else:
         return render_template("index.html",player=util.getPlayers(session["game"]))
@@ -153,6 +146,9 @@ def getTarget():
 @app.route("/getPursuer")
 def getPursuer():
     pursuer = util.getPursuer(session["game"], session["user"])
+    print pursuer
+    print session["game"]
+    print session['user']
     return json.dumps(pursuer)
 
 @app.route("/getTargetLocation")
