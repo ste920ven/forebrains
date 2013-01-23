@@ -146,6 +146,9 @@ def getTarget():
 @app.route("/getPursuer")
 def getPursuer():
     pursuer = util.getPursuer(session["game"], session["user"])
+    print pursuer
+    print session["game"]
+    print session['user']
     return json.dumps(pursuer)
 
 @app.route("/getTargetLocation")

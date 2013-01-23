@@ -143,7 +143,6 @@ def getRankings(game):
     rankings = []
     return rankings
 
-    
 def addFriend(player,friend):
     tmp = users.find_one({"user":player})
     tmp["friends"].append(friend)
