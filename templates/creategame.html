@@ -3,24 +3,26 @@
 {% block head %}{{ super() }}{% endblock %}
 {% block tabs %}{{super()}}{% endblock %}
 {% block body %}
-<center>
-<h1> Create a New Game of Assassin </h1>
-<form action="" method="POST">
-<table>
-  <tr>
-		<td align = "right">Choose a game name:</td>
-		<td><input type="text" name="name" size="50"></td>
+<div class="content">
+  <center>
+    <h1> Create a New Game of Assassin </h1>
+    <form action="" method="POST">
+      <table>
+	<tr>
+	  <td align = "right">Choose a game name:</td>
+	  <td><input type="text" name="name" size="50"></td>
 	</tr>
 	<tr>
-		<td align = "right">Choose a password for the game[leave blank for public game]:</td>
-		<td><input type="text" name="pass1" size="50"></td>
+	  <td align = "right">Choose a password for the game[leave blank for public game]:</td>
+	  <td><input type="text" name="pass1" size="50"></td>
 	</tr>
-</table>
-
-<input type="submit" name="submitgame" value="Submit">
-<input type="submit" name="back" value="Back">
-</center>
-</form>
+      </table>
+      
+      <input type="submit" name="submitgame" value="Submit">
+      <input type="submit" name="back" value="Back">
+  </center>
+  </form>
+</div>
 {% if taken %}
 There is a game that exists with this name.
 {% endif %}
