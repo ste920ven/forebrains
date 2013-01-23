@@ -194,7 +194,8 @@ def dead():
 
 @app.route("/pcheckin")
 def pcheckin():
-    return json.dumps(util.checkForce(session["game"],session["name"]))
+    result = util.checkForce(session["game"],session["user"])
+    return json.dumps(result)
 
 if __name__=="__main__":
     app.debug=True
