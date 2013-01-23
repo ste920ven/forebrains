@@ -151,8 +151,6 @@ def getPursuer():
 
 @app.route("/getTargetLocation")
 def getTargetLocation():
-    print session["game"]
-    print session["user"]
     location = util.getLoc(session["game"], util.getTarget(session["game"], session["user"]));
     return json.dumps(location)
 

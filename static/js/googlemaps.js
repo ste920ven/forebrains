@@ -54,6 +54,7 @@ function makeMap(position)
 	mapTypeId: google.maps.MapTypeId.ROADMAP
 	};
     map = new google.maps.Map(document.getElementById("field"), mapOptions);
+    console.log(document.getElementById("field"));
     watcher = navigator.geolocation.watchPosition(updateYourMarker,
 						  updateYourMarker,
 						  {'enableHighAccuracy':true,
@@ -96,34 +97,10 @@ function updateYourMarker(e){
     getLocation(function(p) {
 	lat = p.coords.latitude;
 	lng = p.coords.longitude;
+	var yourMarker;
 	try {
-	    yourMarker.setPosition(new google.maps.LatLng(lat, lng));
+	yourMarker.setPosition(new google.maps.LatLng(lat, lng));
 	}
 	catch (err) {}
     });
-    $("checkin").click(updateMarkers);
 }
-
-function updateMarkers(e){
-    if (gamestarted) {
-	$.getJSON("/getTargetLocation", function (data) {
-	    targetLat = data[0];
-	    targetLng = data[1];
-	    targetLatlng = new google.maps.LatLng(targetLat,targetLng);
-	    try {
-		targetMarker.setPosition(targetLatlng);
-	    }
-	    catch (err) {}
-	});
-	$.getJSON("/getPursuerLocation", function (data) {
-	    pursuerLat = data[0];
-	    pursuerLng = data[1];
-	    pursuerLatlng = new google.maps.LatLng(pursuerLat,pursuerLng);
-	    try {
-		pursuerMarker.setPosition(pursuerLatlng);
-	    }
-	    catch (err) {}
-	});
-    };
-}
-

@@ -90,6 +90,9 @@ def getTarget(game,player):
 
 def getLoc(game, player):
     tmp = games.find_one({"name":game})
+    print "here1"
+    print player
+    print game
     return tmp[player]["loc"]
 
 def getPursuer(game,player):
