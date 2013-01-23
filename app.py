@@ -27,6 +27,7 @@ def game(name):
             util.startGame(name)
             return render_template("index.html",players=util.getPlayers(name),creator=True,started=True)
         if request.form.has_key("checkin"):
+            util.callForForce(session["game"],util.getTarget(session["game"],session["user"]))
             if session["user"] == util.getCreator(name):
                 return render_template("index.html",players=util.getPlayers(name),creator=True,started=util.gameStarted(name))
             else:
@@ -190,6 +191,10 @@ def alllocs():
 @app.route("/dead")
 def dead():
     return redirect(url_for("home"))
+
+@app.route("/pcheckin")
+def pcheckin():
+    return json.dumps(util.checkForce(session["game"],session["name"]))
 
 if __name__=="__main__":
     app.debug=True

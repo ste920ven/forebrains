@@ -29,7 +29,7 @@ def createGame(creator,password,name):
         tmp = base64.b64encode(password)
     else:
         tmp = False
-    newgame = {"creator" : creator, "pass" : tmp, "name" : name, "started" : False, creator : {"loc":[0,0], "pursuer" : "", "target" : "", "kills" : 0, "live" : False, "penalty" : 0, "bonus" : False}}
+    newgame = {"creator" : creator, "pass" : tmp, "name" : name, "started" : False, creator : {"loc":[0,0], "pursuer" : "", "target" : "", "kills" : 0, "live" : False, "penalty" : 0, "bonus" : False, "forceupdate":False}}
     games.insert(newgame)
     return True
 
@@ -38,9 +38,13 @@ def addPlayer(game,user):
     k = tmp.keys()
     if user in k:
         return False
-    tmp[user] = {"loc":[0,0], "pursuer" : "", "target" : "", "kills" : 0, "live" : False, "penalty" : 0, "bonus" : False}
+    tmp[user] = {"loc":[0,0], "pursuer" : "", "target" : "", "kills" : 0, "live" : False, "penalty" : 0, "bonus" : False, "forceupdate":False}
     games.update({"name" : game},tmp)
     return True
+
+def checkForce(game,player):
+    tmp = games.find_one({"name":game})
+    return tmp[player]["forceupdate"]
 
 def checkUserPass(user,password):
     encpass = base64.b64encode(password)
@@ -123,6 +127,12 @@ def getPenaltyTime(game,player):
     tmp = games.find_one({"name":game})
     return tmp[player]["penalty"]
     
+def callForForce(game,player):
+    tmp = games.find_one({"name":game})[player]
+    tmp["forceupdate"] = True
+    games.update({"name":game},{"$set":{player:tmp}})
+    return True
+
 def setLoc(game,player,loc):
     tmp = games.find_one({"name":game})[player]
     tmp["loc"] = loc

@@ -1,6 +1,6 @@
 var lat,lng;
 var watcher;
-var map, player, yourMarker, pursuer, target, pursuerMarker, targetMarker, game, targetLat, targetLng, pursuerLat, pursuerLng, gamestarted, allMarkers, alive;
+var map, player, yourMarker, pursuer, target, pursuerMarker, targetMarker, game, targetLat, targetLng, pursuerLat, pursuerLng, gamestarted, allMarkers, alive,notTarget,notPurse;
 var startRefresh = 1;
 $(document).ready(function(){
     initializeMap();
@@ -109,10 +109,17 @@ function makeMap(position)
 
 function updateYourMarker(e){
     $.getJSON("/started",function (data) {
-	if (data == true && startRefresh == 1)
+	if (data == true && startRefresh == 1) {
 	startRefresh = 2;
+	}
     });
     if (alive) {
+	$.getJSON("/pcheckin",function(data) {
+	    if (data) {
+		notPursuer = true;
+		updateMarkers(68);
+	    }
+	});
 	$.getJSON("/alive", function (data) {
 	    alive = data;
 	});
@@ -139,8 +146,10 @@ function updateYourMarker(e){
 	}
     }
 }
+
 function updateMarkers(e){
   if (gamestarted) {
+      if (!notTarget) {
       $.getJSON("/getTargetLocation", function (data) {
 	  targetLat = data[0];
 	  targetLng = data[1];
@@ -149,7 +158,9 @@ function updateMarkers(e){
 	      targetMarker.setPosition(targetLatlng);
 	  }
 	  catch (err) {}
-      });
+	  notTarget = false;
+      });}
+      if (!notPurse) {
       $.getJSON("/getPursuerLocation", function (data) {
 	  pursuerLat = data[0];
 	  pursuerLng = data[1];
@@ -158,6 +169,7 @@ function updateMarkers(e){
 	      pursuerMarker.setPosition(pursuerLatlng);
 	  }
 	  catch (err) {}
-      });
+	  notPurse = false;
+      });}
   };
 }
