@@ -78,9 +78,11 @@ function makeMap(position)
 	var targetMarker = new google.maps.Marker({
 	    position: targetLatlng,
 	    map: map,
+	    icon: {"url": "/static/Tlingit-dagger-1-icon.png"},
 	    title: "TARGET"
 	});
-    });};
+    });
+    };
     if (gamestarted){
     $.getJSON("/getPursuerLocation", function (data) {
 	pursuerLat = data[0];
@@ -89,7 +91,7 @@ function makeMap(position)
 	var pursuerMarker = new google.maps.Marker({
 	    position: pursuerLatlng,
 	    map: map,
-	    title: "PURSUER"
+	    title: "PURSUER",
 	});
     });};
     
