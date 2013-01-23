@@ -5,21 +5,21 @@
 {% block body %}
 <div class="content">
   <center>
-    <h1> Create a New Game of Assassin </h1>
+    <h2>Start a New Mission</h2><br>
     <form action="" method="POST">
       <table>
 	<tr>
-	  <td align = "right">Choose a game name:</td>
+	  <td align = "right">Mission Name:</td>
 	  <td><input type="text" name="name" size="50"></td>
 	</tr>
 	<tr>
-	  <td align = "right">Choose a password for the game[leave blank for public game]:</td>
+	  <td align = "right">Mission Password (blank for public access):</td>
 	  <td><input type="text" name="pass1" size="50"></td>
 	</tr>
       </table>
-      
-      <input type="submit" name="submitgame" value="Submit">
-      <input type="submit" name="back" value="Back">
+      <br>
+      <input class="button" type="submit" name="submitgame" value="Submit">
+      <input class="button" type="submit" name="back" value="Back">
   </center>
   </form>
 </div>
