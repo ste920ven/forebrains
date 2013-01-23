@@ -4,7 +4,6 @@ Steven Huang<br>
 Dina Levy-Lambert<br>
 Nathaniel Biggs<br>
 Jack Stevenson<br>
-==========
 <h1>ASSASSIN</h1> <h2>CS edition</h2>
 <h2>Roles:</h2>
 <ul>
