@@ -177,7 +177,7 @@ def getAllLocs(game):
     invalids = ["creator","pass","name","_id","started"]
     for person in k:
         if person not in invalids:
-            locations.append(tmp[person]["loc"])
+            locations.append([tmp[person],tmp[person]["loc"]])
     return locations
 
 def getGames():
