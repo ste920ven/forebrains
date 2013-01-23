@@ -91,7 +91,8 @@ function makeMap(position)
 	var pursuerMarker = new google.maps.Marker({
 	    position: pursuerLatlng,
 	    map: map,
-	    title: "PURSUER",
+	    icon: {"url": "/static/Spy.png"},
+	    title: "PURSUER"
 	});
     });};
     
