@@ -71,7 +71,6 @@ def startGame(game):
     toremove = []
     for exception in exceptions:
         players.remove(exception)
-    print players
     for person in players:
         tmp[person]["live"] = True
         if current == len(players) - 1:
@@ -90,8 +89,6 @@ def gameStarted(game):
        
 def getTarget(game,player):
     tmp = games.find_one({"name":game})
-    print player
-    print game
     return tmp[player]["target"]
 
 def getLoc(game, player):
@@ -123,8 +120,20 @@ def setLoc(game,player,loc):
     tmp["loc"] = loc
     games.update({"name":game},{"$set":{player:tmp}})
     return True
+
+def setTarget(game,player,newTarget):
+    tmp = games.find_one({"name":game})[player]
+    tmp[player]["target"] = newTarget
+    games.find_one({"name":game},{"$set":{player:tmp[player]}})
+    return True
+
+def setPursuer():
+    tmp = games.find_one({"name":game})[player]
+    tmp[player]["pursuer"] = newTarget
+    games.find_one({"name":game},{"$set":{player:tmp[player]}})
+    return True
     
-def setTarget(game,pursuer,target):
+def changeTarget(game,pursuer,target):
     tmpone = games.find_one({"name":game})[pursuer]
     tmptwo = games.find_one({"name":game})[target]
     tmpone["target"] = target

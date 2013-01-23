@@ -16,7 +16,6 @@ $(document).ready(function(){
     $.getJSON("/getCurrentGame", function (data) {
 	game = data;
     });
-    console.log(gamestarted);
     if(gamestarted) {
     $.getJSON("/getTarget", function (data) {
 	target = data;
@@ -56,7 +55,6 @@ function makeMap(position)
 	mapTypeId: google.maps.MapTypeId.ROADMAP
 	};
     map = new google.maps.Map(document.getElementById("field"), mapOptions);
-    console.log(document.getElementById("field"));
     watcher = navigator.geolocation.watchPosition(updateYourMarker,
 						  updateYourMarker,
 						  {'enableHighAccuracy':true,
@@ -124,7 +122,6 @@ function updateYourMarker(e){
 
 function killFunction(e){
     if (gamestarted) {
-	updateMarkers();
 	var R = 6371;
 	var dLat = toRad(lat - targetLat);
 	var dLong = toRad(lng - targetLng);

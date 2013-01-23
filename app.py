@@ -31,7 +31,12 @@ def game(name):
                 return render_template("index.html",players=util.getPlayers(name),creator=True,started=util.gameStarted(name))
             else:
                 return render_template("index.html",players=util.getPlayers(name),ceator=False)
-
+        if request.form.has_key("kill"):
+            print "here"
+            if session["user"] == util.getCreator(name):
+                return render_template("index.html",players=util.getPlayers(name),creator=True,started=util.gameStarted(name))
+            else:
+                return render_template("index.html",players=util.getPlayers(name),ceator=False)
 @app.route("/login",methods=["POST","GET"])
 def login():
     if request.method=="GET":
@@ -155,9 +160,6 @@ def getTarget():
 @app.route("/getPursuer")
 def getPursuer():
     pursuer = util.getPursuer(session["game"], session["user"])
-    print pursuer
-    print session["game"]
-    print session['user']
     return json.dumps(pursuer)
 
 @app.route("/getTargetLocation")
@@ -176,13 +178,16 @@ def started():
 
 @app.route("/kill")
 def kill():
+    print "here"
     gamesystem.kill(session["game"],session["user"],util.getTarget(session["game"],session["user"]))
     return json.dumps()
 
 @app.route("/penalize")
 def penalize(): 
-    gamesystem.kill(session["game"],session["user"])
+    print "here1"
+    gamesystem.penalize(session["game"],session["user"])
     return json.dumps()
+
 
 if __name__=="__main__":
     app.debug=True
