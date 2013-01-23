@@ -7,6 +7,8 @@ def kill(game,pursuer,target):
   util.setLive(game,str(target),False)
   util.setTarget(game,str(target),"")
   util.setPursuer(game,str(target),"")
+  if newTarget == pursuer:
+    end(game)
   return True
   
 def checkIn(game,player,loc):
