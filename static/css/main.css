@@ -51,15 +51,15 @@ ul#tabnav li button { /* settings for all tab links */
 		   border-top-right-radius:4px;
 		   border-top-left-radius:4px;
 		   background-image:url('../bedge_grunge.png');
-		   color:#7a5200; /* set unselected tab color as desired */
+		   color:black; /* set unselected tab color as desired */
 		   margin-right: 0px; /* set additional spacing between tabs as desired */
 		   border-bottom: none;
 		   font-size: 20px;
-		   text-shadow: -.08em -.08em white, .08em .08em black;
+		   text-shadow: 2px 2px 2px black;
                    }
 
 ul#tabnav form button:hover  { /* settings for hover effect */
-                   text-shadow: .08em .08em white, -.08em -.08em black;
+                   font-weight:bold;
                    }
 
 /* end css tabs. credit Joshua Kaufman of unraveled.com */
@@ -69,18 +69,16 @@ form               {
 		   margin:0px;
                    }
 
-/*.content        {
-                   background-image:url('../bedge_grunge.png');
-		   border-style:none;
-		   border-radius:8px;
-                   }*/
-
 .awaitinggame      {
 		   padding:4px;
                    }
 
 .awaitinggame gamename{
                    width:500px
+                   }
+
+table              {
+                   margin:0px 15px;
                    }
 
 table, th, td      {
@@ -94,7 +92,7 @@ td                 {
                    padding: 4px 15px;
                    }
 
-[name='submitjoin']{
+/*[name='submitjoin']{
                    color:#ffffff;
 		   padding:3px 5px;
                    background:#333333;
@@ -107,7 +105,7 @@ td                 {
                    background:#888888;
 		   box-shadow:0px 2px 4px black;
                    }
-
+*/
 [name='Password']  {
                    padding: 4px;
                    }
@@ -130,3 +128,25 @@ h2                 {
                    border-radius:8px;
 		   padding:10px 10px 20px;
 		   }
+
+.button           {
+                  border-radius:2px;
+		  padding:3px;
+                  }
+
+.button#check-in  {
+                  border-radius:6px;
+		  padding:5px 10px;
+                  font-size:20px;
+		  text-shadow:0.1em 0.1em 0.2em black;
+		  box-shadow: 0.1em 0.1em 0.2em black;
+                  }
+
+.button#assassinate{
+                  border-radius:6px;
+		  padding:5px 10px;
+		  font-size:20px;
+		  text-shadow: 0.1em 0.1em 0.2em black;
+		  box-shadow: 0.1em 0.1em 0.2em black;
+		  margin-left:40px;
+		  }
