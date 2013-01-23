@@ -82,7 +82,7 @@ def signup():
 def creategame():
     if request.method == "GET":
         if 'user' not in session:
-            return redirect(url_for("home"))
+            return redirect(url_for("login"))
         return render_template("creategame.html")
     else:
         pending = request.form.keys()[0]
@@ -101,7 +101,7 @@ def creategame():
 def joingame():
     if request.method == "GET":
         if 'user' not in session:
-            return redirect(url_for("home"))
+            return redirect(url_for("login"))
         return render_template("joingame.html",games=util.getGameInfos(session["user"]))
     else:
         pending = request.form.keys()[0]
