@@ -176,17 +176,22 @@ def getCreator(game):
     tmp = games.find_one({"name":game})
     return tmp["creator"]
 
-def getGameInfos():
+def getGameInfos(user):
     l = []
     for game in getGames():
         creator = str(getCreator(game))
         numplayers = len(getPlayers(game))
         tmp = games.find_one({"name":game})
         started = gameStarted(game)
+        players = getPlayers(game)
+        ingame = False
+        for player in players:
+            if str(player) == user:
+                ingame = True
         if tmp["pass"]==False:
             view = "Public"
         else:
             view = "Private"
-        l.append([game,creator,view,numplayers,started])
+        l.append([game,creator,view,numplayers,started,ingame])
     return l
 
