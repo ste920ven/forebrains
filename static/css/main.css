@@ -118,3 +118,7 @@ td                 {
 [name='Password'], [name='Username'] {
                   padding:4px;
                   }
+
+.circle           {
+                  list-style-type:circle;
+                  }
