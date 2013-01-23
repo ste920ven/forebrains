@@ -1,12 +1,11 @@
 *                 {margin:0;
                    padding:0;
-                   font-family:"Courier New","Lucida Console",courier,monospace;
+                   font-family:"Georgia","Comic Sans MS",serif;
 		   font-size:13;
 		  }
 
 body              {
-                  background:url('../wood_1.png');
-		  width:75%;
+                  background:url('../extra_clean_paper.png');
 		  }
 
 .button           {border-style:solid;
@@ -118,10 +117,4 @@ td                 {
 div#field         {
                   width:75%;
 		  height:75%;
-		  }
-
-div#background         {
-                  background-image:url('../bedge_grunge.png');
-		  border-style:none;
-		  border-radius:8px;
 		  }
