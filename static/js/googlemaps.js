@@ -110,7 +110,6 @@ function makeMap(position)
 }*/
 
 function updateYourMarker(e){
-    console.log("hmm")
     getLocation(function(p) {
 	lat = p.coords.latitude;
 	lng = p.coords.longitude;
