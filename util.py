@@ -131,13 +131,13 @@ def setLoc(game,player,loc):
 
 def setTarget(game,player,newTarget):
     tmp = games.find_one({"name":game})[player]
-    tmp[player]["target"] = str(newTarget)
+    tmp["target"] = str(newTarget)
     games.update({"name":game},{"$set":{player:tmp}})
     return True
 
 def setPursuer(game,player,newPursuer):
     tmp = games.find_one({"name":game})[player]
-    tmp[player]["pursuer"] = newPursuer
+    tmp["pursuer"] = newPursuer
     games.update({"name":game},{"$set":{player:tmp}})
     return True
     
