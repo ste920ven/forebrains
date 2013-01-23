@@ -1,6 +1,6 @@
 var lat,lng;
 var watcher;
-var map, player, yourMarker, pursuer, target, pursuerMarker, targetMarker, game, targetLat, targetLng, pursuerLat, pursuerLng, gamestarted;
+var map, player, yourMarker, pursuer, target, pursuerMarker, targetMarker, game, targetLat, targetLng, pursuerLat, pursuerLng, gamestarted, allMarkers;
 
 $(document).ready(function(){
     initializeMap();
@@ -16,15 +16,19 @@ $(document).ready(function(){
     $.getJSON("/getCurrentGame", function (data) {
 	game = data;
     });
-    if(gamestarted) {
-    $.getJSON("/getTarget", function (data) {
-	target = data;
+    $.getJSON("/alive", function (data) {
+	alive = data;
     });
-    $.getJSON("/getPursuer", function (data) {
-	pursuer = data;
-    });
-    }});
-	    
+    if(alive) {
+	$.getJSON("/getTarget", function (data) {
+	    target = data;
+	});
+	$.getJSON("/getPursuer", function (data) {
+	    pursuer = data;
+	});
+    }
+});
+
 
 function initializeMap() {
     getLocation(makeMap);
@@ -44,6 +48,12 @@ function getLocation(e)
  var gamestarted = false;
 function makeMap(position)
 {
+    if (alive) {
+	$.getJSON("/alive", function (data) {
+	    alive = data;
+	    console.log(alive);
+	}); 
+    }
     lat = position.coords.latitude;
     lng = position.coords.longitude;
     console.log(lat);
@@ -89,25 +99,21 @@ function makeMap(position)
 	var pursuerMarker = new google.maps.Marker({
 	    position: pursuerLatlng,
 	    map: map,
+	    icon: {"url": "/static/Spy.png"},
 	    title: "PURSUER",
 	});
     });};
     
 }
 
-/*function updateYourMarker(e){
-    getLocation(function(p) {
-	lat = p.coords.latitude;
-	lng = p.coords.longitude;
-	var yourMarker;
-	try {
-	yourMarker.setPosition(new google.maps.LatLng(lat, lng));
-	}
-	catch (err) {}
-    });
-}*/
 
 function updateYourMarker(e){
+    if (alive) {
+	$.getJSON("/alive", function (data) {
+	    alive = data;
+	});
+    }
+    if (alive) {
     getLocation(function(p) {
 	lat = p.coords.latitude;
 	lng = p.coords.longitude;
@@ -117,6 +123,22 @@ function updateYourMarker(e){
 	catch (err) {}
   });
     $("checkin").click(updateMarkers);
+    }
+    else {
+	if (gamestarted) {
+	$("checkin").disabled = true;
+	$("kill").disabled = true;
+	$.getJSON("/alllocs", function (data) {
+	    for (var i = 0; i < data.length; i++) {
+		allMarkers[i] = new google.maps.Marker({
+		    position: new google.maps.LatLng(data[i][1][0],data[i][1][1]),
+		    map: map,
+		    title: data[i][0],
+		});
+	    }
+	});
+	};
+    }
 }
 
 function updateMarkers(e){
