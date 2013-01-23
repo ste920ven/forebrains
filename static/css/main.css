@@ -69,18 +69,16 @@ form               {
 		   margin:0px;
                    }
 
-/*.content        {
-                   background-image:url('../bedge_grunge.png');
-		   border-style:none;
-		   border-radius:8px;
-                   }*/
-
 .awaitinggame      {
 		   padding:4px;
                    }
 
 .awaitinggame gamename{
                    width:500px
+                   }
+
+table              {
+                   margin:0px 15px;
                    }
 
 table, th, td      {
@@ -135,3 +133,20 @@ h2                 {
                   border-radius:2px;
 		  padding:3px;
                   }
+
+.button#check-in  {
+                  border-radius:6px;
+		  padding:5px 10px;
+                  font-size:20px;
+		  text-shadow:0.1em 0.1em 0.2em black;
+		  box-shadow: 0.1em 0.1em 0.2em black;
+                  }
+
+.button#assassinate{
+                  border-radius:6px;
+		  padding:5px 10px;
+		  font-size:20px;
+		  text-shadow: 0.1em 0.1em 0.2em black;
+		  box-shadow: 0.1em 0.1em 0.2em black;
+		  margin-left:40px;
+		  }
