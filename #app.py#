@@ -176,7 +176,7 @@ def started():
 
 @app.route("/kill")
 def kill():
-    
+    gamesystem.kill(session["game"],session["user"]
 
 @app.route("/penalize")
 def penalize(): 

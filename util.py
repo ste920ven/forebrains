@@ -199,3 +199,4 @@ def getGameInfos(user):
             view = "Private"
         l.append([game,creator,view,numplayers,started,ingame])
     return l
+

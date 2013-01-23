@@ -91,8 +91,7 @@ function makeMap(position)
 	var pursuerMarker = new google.maps.Marker({
 	    position: pursuerLatlng,
 	    map: map,
-	    icon: {"url": "/static/Spy.png"},
-	    title: "PURSUER"
+	    title: "PURSUER",
 	});
     });};
     
@@ -111,6 +110,7 @@ function makeMap(position)
 }*/
 
 function updateYourMarker(e){
+    console.log("hmm")
     getLocation(function(p) {
 	lat = p.coords.latitude;
 	lng = p.coords.longitude;
