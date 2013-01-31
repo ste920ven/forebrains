@@ -148,6 +148,7 @@ function updateYourMarker(e){
 }
 
 function updateMarkers(e){
+    alert(e);
   if (gamestarted) {
       if (!notTarget) {
       $.getJSON("/getTargetLocation", function (data) {

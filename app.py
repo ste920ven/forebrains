@@ -27,7 +27,8 @@ def game(name):
             util.startGame(name)
             return render_template("index.html",players=util.getPlayers(name),creator=True,started=True)
         if request.form.has_key("checkin"):
-            util.callForForce(session["game"],util.getTarget(session["game"],session["user"]))
+            if util.gameStarted(session["game"]):
+                util.callForForce(session["game"],util.getTarget(session["game"],session["user"]))
             if session["user"] == util.getCreator(name):
                 return render_template("index.html",players=util.getPlayers(name),creator=True,started=util.gameStarted(name))
             else:
