@@ -17,3 +17,4 @@ The Assassin player's goal is traditionally to eliminate all other players by ph
 Players can check in as often as they wish to receive the location of their target, but they also give their location to their pursuer. Every player is both target and pursuer.
 
 This project is hosted on ml7.stuycs.org:7305 as of 1/30/13.
+<b>NOTE</b>: This project is no longer being hosted
